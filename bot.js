@@ -238,11 +238,12 @@ client.on("message", message => {
 	       Help Commands: 
 			 
 ${prefix}public ⥨ الاوامر العامة
-${prefix}admin ⥨ اوامر الادارة
-			 
+${prefix}admin ⥨ اوامر الادارة	 
 ${prefix}games ⥨ اوامر الالعاب
 ${prefix}music ⥨ اوامر الموسيقى
+
 Other Commands:
+
 ${prefix}invite ⥨ لدعوة البوت الى سيرفرك
 ${prefix}support ⥨ لدخول سيرفر الدعم
 	  `)
