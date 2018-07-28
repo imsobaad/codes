@@ -319,7 +319,7 @@ client.channels.get("470259562121920512").sendEmbed(embed)
 
 client.on('ready', function(){
     var ms = 10000 ;
-    var setGame = ['In 77 Server','*help | *invite','In 77 Server','*help | *invite','In 77 Server'];
+    var setGame = ['In 80 Server','*help | *invite','In 80 Server','*help | *invite','In 80 Server'];
     var i = -1;
     var j = 0;
     setInterval(function (){
