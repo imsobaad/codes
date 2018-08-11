@@ -62,11 +62,11 @@ client.on('message',async message => {
 var codes = "*";
 var args = message.content.split(" ").slice(1);
 var title = args[1]
-          if(message.content.startsWith(codes + "giveaway")) {
-              if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **s You Dont Have Premission**');
-              if(!args) return message.channel.send(`**Use : *giveaway  <الجائزة> <الوقت>**`);
-              if(!title) return message.channel.send(`**Use : **\`*giveaway ${args[0]} Minutes\`** <الجائزة>**`);
-         if(!isNaN(args)) return message.channel.send(':heavy_multiplication_x:| **The Time Be Nambers `` Do the Commend Agin``**');
+          if(message.content.startsWith(codes + "start")) {
+              if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **You Dont Have Premissions**');
+              if(!args) return message.channel.send(`**Use : *start  <Time> <Presents>**`);
+              if(!title) return message.channel.send(`**Use : **\`*start ${args[0]} Minutes\`** <Presents>**`);
+         if(!isNaN(args)) return message.channel.send(':heavy_multiplication_x:| **Time In Minutes`` Do the Commend Agin``**');
                            let giveEmbed = new Discord.RichEmbed()
                   .setAuthor(message.guild.name, message.guild.iconURL)
                   .setDescription(`**${title}** \nReact Whit 🎉 To Enter! \n**Time remaining: Minutes :${duration / 60000}**`)
@@ -88,7 +88,6 @@ var title = args[1]
                    });
           }
 });
-
 
 
 
