@@ -58,7 +58,13 @@ client.on('ready', () => {
 
 client.on('message', message => {
 if (message.content.startsWith(prefix + 'help')) {
-    let pages = ['هنا المكتوب بالصفحه الاولي','page2','page3']
+    let pages = ['╔╗╔═╦══╦═╗─╔╦═══╗╔══╗╔═══╦════╗
+║║║╔╩╣╠╣║╚╗║║╔═╗║║╔╗║║╔═╗║╔╗╔╗║
+║╚╝╝─║║║╔╗╚╝║║─╚╝║╚╝╚╣║─║╠╝║║╚╝
+║╔╗║─║║║║╚╗║║║╔═╗║╔═╗║║─║║─║║
+║║║╚╦╣╠╣║─║║║╚╩═║║╚═╝║╚═╝║─║║
+╚╝╚═╩══╩╝─╚═╩═══╝╚═══╩═══╝─╚╝
+','page2','page3']
     let page = 1;
 
     let embed = new Discord.RichEmbed()
