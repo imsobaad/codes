@@ -31,6 +31,7 @@ const sql = require("sqlite");
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+client.user.setGame(`*help | *invite`,"http://twitch.tv/S-F")
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
@@ -320,24 +321,6 @@ client.channels.get("470259562121920512").sendEmbed(embed)
 
 
 
-
-client.on('ready', function(){
-    var ms = 10000 ;
-    var setGame = ['In 80 Server','*help | *invite','In 80 Server','*help | *invite','In 80 Server'];
-    var i = -1;
-    var j = 0;
-    setInterval(function (){
-        if( i == -1 ){
-            j = 1;
-        }
-        if( i == (setGame.length)-1 ){
-            j = -1;
-        }
-        i = i+j;
-        client.user.setGame(setGame[i],`http://www.twitch.tv/D.JPEI`);
-    }, ms);
-
-});
 
 
 
