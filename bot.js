@@ -963,6 +963,23 @@ client.on('message', msg => {
 
 
 
+client.on('message', msg => {
+  if(msg.content === '*sall') {
+    msg.guild.channels.forEach(c => {
+      c.overwritePermissions(msg.guild.id, {
+        SEND_MESSAGES: true,
+        READ_MESSAGES: true
+      })
+    })
+    msg.channel.send('Done')
+  }
+})
+
+
+
+
+
+
 client.on('message', eyad => {
   if (eyad.content.startsWith('*vb')) {
 if (!eyad.member.hasPermission("MOVE_MEMBERS")) return eyad.channel.send("**انت لا تمتلك الخاصيه المطلوبه** | ❎ ");
