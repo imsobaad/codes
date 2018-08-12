@@ -60,13 +60,19 @@ client.user.setGame(`Use *help`,"http://twitch.tv/S-F")
 client.on('message', async message => {
 if(message.author.bot) return;
 if (message.channel.guild) {
-if (message.content === '-myV') {
-message.channel.send(`Your XP : ${voice[message.member.id].xp}
-Your Level : ${voice[message.member.id].level}`);
+if (message.content === '*level') {
+ const embed = new Discord.RichEmbed()  
+       .setColor("RANDOM") 
+      .setDescription(`
+Your XP : ${voice[message.member.id].xp}
+Your Level : ${voice[message.member.id].level}
+	  `)
+   message.channel.sendEmbed(embed)
       fs.writeFile('./voiceState.json', JSON.stringify(voice, null, 4), (e) => {
         if(e) console.log(e);
       });
 }}});
+
 
 
 
