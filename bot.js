@@ -666,7 +666,7 @@ if(!args[0]) return message.reply('مرجو كتابة نص الدي تريد');
   if (message.content === "*avatar") {
    const embed = new Discord.RichEmbed()
        .setColor('RANDOM') 
-       .setFooter('By ! ~ D e v i l')
+       .setFooter('~,.Bad')
        .setThumbnail(message.author.avatarURL)
        .addField(message.author.displayAvatarURL)
  message.channel.send(embed);
