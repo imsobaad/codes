@@ -1600,25 +1600,6 @@ message.author.sendEmbed(embed)
 });
 
 
-
-client.on('guildMemberAdd', member => {
-    member.guild.channels.get('478226952361082891').setName(`Total Users: ${member.guild.memberCount}`);
-    let humans = member.guild.memberCount - member.guild.members.filter(m => m.user.bot).size
-    member.guild.channels.get('478226969276710913').setName(`Total Humans: ${humans}`);
-    let bots = member.guild.members.filter(m => m.user.bot).size
-    member.guild.channels.get('478226980471439381').setName(`Total Bots: ${bots}`);
-});
-client.on('guildMemberRemove', member => {
-    member.guild.channels.get('478226952361082891').setName(`Total Users: ${member.guild.memberCount}`);
-    let humans = member.guild.memberCount - member.guild.members.filter(m => m.user.bot).size
-    member.guild.channels.get('478226969276710913').setName(`Total Humans: ${humans}`);
-    let bots = member.guild.members.filter(m => m.user.bot).size
-    member.guild.channels.get('478226980471439381').setName(`Total Bots: ${bots}`);
-});
-
-
-
-
 client.on('message',  (message) => {
         if(message.content.startsWith('*لكمة')) {
   let user = message.mentions.users.first();
