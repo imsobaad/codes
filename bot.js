@@ -2114,7 +2114,7 @@ client.on('guildMemberAdd', eyad => {
       .addField('الايدي :', "**[" + `${eyad.id}` + "]**" )
       .addField('عدد الاعضاء :',`${eyad.guild.memberCount}`)
       .addField('السيرفر: ', `${eyad.guild.name}`,true)                          
-      .setFooter(" Join Log ! ")
+      .setFooter(" King | Bot ")
       .setTimestamp()
  
     channel.sendEmbed(embed);
@@ -2133,7 +2133,7 @@ client.on('guildMemberRemove', eyad => {
       .addField('الايدي :', "**[" + `${eyad.id}` + "]**" )
       .addField('عدد الاعضاء :',`${eyad.guild.memberCount}`)
       .addField('السيرفر : ', `${eyad.guild.name}`,true)                          
-      .setFooter(" Leave Log ! ")
+      .setFooter(" King | Bot ")
       .setTimestamp()
  
     channel.sendEmbed(embed);
