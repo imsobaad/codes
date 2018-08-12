@@ -111,11 +111,11 @@ if (message.content.startsWith(prefix + "level")) {
     }
      var mentionned = message.mentions.users.first();
  
-      var epic;
+      var userData;
       if(mentionned){
-          var epic = mentionned;
+          var userData = mentionned;
       } else {
-          var epic = message.author;
+          var userData = message.author;
  
       }
  
