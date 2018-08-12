@@ -56,41 +56,55 @@ client.user.setGame(`Use *help`,"http://twitch.tv/S-F")
 });
 
 
+client.on('message', async message => {
+if(message.author.bot) return;
+if (message.channel.guild) {
+if (message.content === '-myV') {
+message.channel.send(`Your XP : ${voice[message.member.id].xp}
+Your Level : ${voice[message.member.id].level}`);
+      fs.writeFile('./voiceState.json', JSON.stringify(voice, null, 4), (e) => {
+        if(e) console.log(e);
+      });
+}}});
 
 
-client.on('message',async message => {
-var codes = "*";
-var args = message.content.split(" ").slice(1);
-var title = args[1]
-          if(message.content.startsWith(codes + "start")) {
-              if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **You Dont Have Premissions**');
-              if(!args) return message.channel.send(`**Use : *start  <Time> <Presents>**`);
-              if(!title) return message.channel.send(`**Use : *start  <Time> <Presents>**`);
-         if(!isNaN(args)) return message.channel.send(':heavy_multiplication_x:| **Time In Minutes`` Do the Commend Agin``**');
-                           let giveEmbed = new Discord.RichEmbed()
-                  .setAuthor(message.guild.name, message.guild.iconURL)
-                  .setDescription(`**${title}** \nReact Whit 🎉 To Enter! \n**Time remaining: Minutes :${duration / 60000}**`)
-                  .setFooter(message.author.username, message.author.avatarURL);
 
-                  message.channel.send(' :heavy_check_mark: **Giveaway Created** :heavy_check_mark:' , {embed: giveEmbed}).then(m => {
-                      message.delete();
-                      m.react('🎉');
-                     setTimeout(() => {
-                       let users = m.reactions.get("🎉").users;
-                       let list = users.array().filter(u => u.id !== client.user.id);
-                       let gFilter = list[Math.floor(Math.random() * list.length) + 0]
-                       let endEmbed = new Discord.RichEmbed()
-                       .setAuthor(message.author.username, message.author.avatarURL)
-                       .setTitle(title)
-                       .addField('Giveaway End !🎉',`Winners : ${gFilter}`)
-                     m.edit('** 🎉 GIVEAWAY ENDED 🎉**' , {embed: endEmbed});
-                     },args * 60000);
-                   });
-          }
+  var returned;
+hero.on('voiceStateUpdate', (user, member) => {
+  if(member.selfDeaf || member.selfMute || member.serverDeaf || member.serverMute) {
+    returned = false;
+  }
+  if(!member.selfDeaf || !member.selfMute ||!member.serverDeaf || !member.serverMute) {
+    returned = true;
+  }
+  setInterval(() => {
+    if(returned === true) {
+      if(member.bot) return;
+      if(!member.voiceChannel) returned = false;
+      if(!voice[member.id]) voice[member.id] = {
+        xp: 1,
+        level: 1
+      };
+      voice[member.id] = {
+        xp: voice[member.id].xp + Math.floor(Math.random() * 4) + 1,
+        level: voice[member.id].level
+      };
+      var curXp = voice[member.id].xp;
+      var curLvl = voice[member.id].level;
+      if(curXp >= 300) {
+        voice[member.id] = {
+          xp: 1,
+          level: curLvl + 1
+        };
+      }
+      fs.writeFile('./voiceState.json', JSON.stringify(voice, null, 4), (e) => {
+        if(e) console.log(e);
+      });
+    } else if(returned === false) {
+      return null;
+    }
+  },5000);
 });
-
-
-
 
 
 
