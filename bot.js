@@ -105,7 +105,7 @@ client.on('message', async message =>{
 const ms = require("ms");
 if (message.author.omar) return;
 if (!message.content.startsWith(prefix)) return;
-if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**لا تستطيع اعطاء ميوت لاحد الادارة**").then(msg => msg.delete(6000))
 var command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
 var args = message.content.split(" ").slice(1);
@@ -913,6 +913,7 @@ const embed = new Discord.RichEmbed()
 ⤠ *hidechannel ⥨ لاخفاء روم معين 
 ⤠ *showchannel ⥨ لاظهار روم معين 
 ⤠ *hall ⥨ لاخفاء جميع الرومات
+⤠ *sall ⥨ لاظهار جميع الرومات
 ⤠ *ct ⥨ لانشاء روم كتابي مع اختيار الاسم
 ⤠ *cv ⥨ لانشاء روم صوتي مع اختيار الاسم 
 ⤠ *v2min ⥨ لانشاء روم صوتي مؤقت لدقيقتين
@@ -1600,6 +1601,23 @@ message.author.sendEmbed(embed)
 
 
 
+client.on('guildMemberAdd', member => {
+    member.guild.channels.get('478226952361082891').setName(`Total Users: ${member.guild.memberCount}`);
+    let humans = member.guild.memberCount - member.guild.members.filter(m => m.user.bot).size
+    member.guild.channels.get('478226969276710913').setName(`Total Humans: ${humans}`);
+    let bots = member.guild.members.filter(m => m.user.bot).size
+    member.guild.channels.get('478226980471439381').setName(`Total Bots: ${bots}`);
+});
+client.on('guildMemberRemove', member => {
+    member.guild.channels.get('478226952361082891').setName(`Total Users: ${member.guild.memberCount}`);
+    let humans = member.guild.memberCount - member.guild.members.filter(m => m.user.bot).size
+    member.guild.channels.get('478226969276710913').setName(`Total Humans: ${humans}`);
+    let bots = member.guild.members.filter(m => m.user.bot).size
+    member.guild.channels.get('478226980471439381').setName(`Total Bots: ${bots}`);
+});
+
+
+
 
 client.on('message',  (message) => {
         if(message.content.startsWith('*لكمة')) {
@@ -2102,6 +2120,331 @@ message.author.sendEmbed(embed)
 
 
 
+client.on('guildMemberAdd', eyad => {
+  let channel = eyad.guild.channels.find('name', 'logs');
+  let memberavatar = eyad.user.avatarURL
+    if (!channel) return;
+  let embed = new Discord.RichEmbed()
+      .setColor('GREEN')
+      .setThumbnail(memberavatar)
+      .setTitle('Member joined')
+  .setTitle('Member Joined')
+      .addField('الاسم : ',`${eyad}`)
+      .addField('الايدي :', "**[" + `${eyad.id}` + "]**" )
+      .addField('عدد الاعضاء :',`${eyad.guild.memberCount}`)
+      .addField('السيرفر: ', `${eyad.guild.name}`,true)                          
+      .setFooter(" Join Log ! ")
+      .setTimestamp()
+ 
+    channel.sendEmbed(embed);
+  });
+
+
+client.on('guildMemberRemove', eyad => {
+  let channel = eyad.guild.channels.find('name', 'logs');
+  let memberavatar = eyad.user.avatarURL
+    if (!channel) return;
+  let embed = new Discord.RichEmbed()
+      .setColor('RED')
+      .setThumbnail(memberavatar)
+  .setTitle('Member Left')
+      .addField('الاسم : ',`${eyad}`)
+      .addField('الايدي :', "**[" + `${eyad.id}` + "]**" )
+      .addField('عدد الاعضاء :',`${eyad.guild.memberCount}`)
+      .addField('السيرفر : ', `${eyad.guild.name}`,true)                          
+      .setFooter(" Leave Log ! ")
+      .setTimestamp()
+ 
+    channel.sendEmbed(embed);
+      });
+
+
+
+client.on('roleCreate','role' => {
+  client.setTimeout(() => {
+    role.guild.fetchAuditLogs({
+        limit: 1,
+        type: 30
+      })
+      .then(audit => {
+        let exec = audit.entries.map(a => a.executor.username)
+        try {
+
+          let log = role.guild.channels.find('name', 'logs');
+          if (!log) return;
+          let embed = new Discord.RichEmbed()
+            .setTitle('➕ RoleCreated')
+            .addField('اسم الرول :', role.name, true)
+            .addField('ايدي الرول :', role.id, true)
+            .addField('بواسطة :', exec, true)
+            .setTimestamp()
+          log.send(embed).catch(e => {
+            console.log(e);
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      })
+  }, 1000)
+})
+  
+client.on("roleDelete", role => {
+  client.setTimeout(() => {
+    role.guild.fetchAuditLogs({
+        limit: 1,
+        type: 30
+      })
+      .then(audit => {
+        let exec = audit.entries.map(a => a.executor.username)
+        try {
+
+          let log = role.guild.channels.find('name', 'logs');
+          if (!log) return;
+          let embed = new Discord.RichEmbed()
+            .setColor('#fd0101')            
+            .setTitle('❌ RoleDeleted')
+            .addField('اسم الرتبة :', role.name, true)
+            .addField('أيدي الرتبة :', role.id, true)
+            .addField('بواسطة :', exec, true)
+            .setTimestamp()
+          log.send(embed).catch(e => {
+            console.log(e);
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      })
+  }, 1000)
+})
+
+client.on("createChannel",  cc => {
+  client.setTimeout(() => {
+    cc.guild.fetchAuditLogs({
+        limit: 1,
+        type: 30
+      })
+      .then(audit => {
+        let exec = audit.entries.map(a => a.executor.username)
+        try {
+
+          let log = cc.guild.channels.find('name', 'logs');
+          if (!log) return;
+          let embed = new Discord.RichEmbed()
+            .setColor('#fd0101')            
+            .setTitle('➕ ChannelCreated')
+            .addField('اسم الروم :', role.name, true)
+            .addField('أيدي الروم :', role.id, true)
+            .addField('بواسطة :', exec, true)
+            .setTimestamp()
+          log.send(embed).catch(e => {
+            console.log(e);
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      })
+  }, 1000)
+})
+
+   client.on("deleteChannel",  dc => {
+  client.setTimeout(() => {
+    dc.guild.fetchAuditLogs({
+        limit: 1,
+        type: 30
+      })
+      .then(audit => {
+        let exec = audit.entries.map(a => a.executor.username)
+        try {
+
+          let log = dc.guild.channels.find('name', 'logs');
+          if (!log) return;
+          let embed = new Discord.RichEmbed()
+            .setColor('#fd0101')            
+            .setTitle('❌ ChannelDeleted')
+            .addField('اسم الروم :', role.name, true)
+            .addField('أيدي الروم :', role.id, true)
+            .addField('بواسطة :', exec, true)
+            .setTimestamp()
+          log.send(embed).catch(e => {
+            console.log(e);
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      })
+  }, 1000)
+})
+
+
+
+client.on('messageUpdate', (message, newMessage) => {
+    if (message.content === newMessage.content) return;
+    if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
+    const channel = message.guild.channels.find('name', 'logs');
+    if (!channel) return;
+
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+       .setColor('SILVER')
+       .setDescription(`✏ **تعديل رساله
+ارسلها <@${message.author.id}>                                                                                                                         تم تعديلها في شات** <#${message.channel.id}>\n\nقبل التعديل:\n \`${message.cleanContent}\`\n\nبعد التعديل:\n \`${newMessage.cleanContent}\``)
+       .setTimestamp();
+     channel.send({embed:embed});
+
+
+});
+
+
+client.on('messageDelete', message => {
+    if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
+    const channel = message.guild.channels.find('name', 'logs');
+    if (!channel) return;
+    
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+       .setColor('BLACK')
+       .setDescription(`🗑️ **حذف رساله**
+**ارسلها <@${message.author.id}>                                                                                                                        تم حذفها في شات** <#${message.channel.id}>\n\n \`${message.cleanContent}\``)
+       .setTimestamp();
+     channel.send({embed:embed});
+
+});
+
+
+client.on('voiceStateUpdate', (oldM, newM) => {
+  let m1 = oldM.serverMute;
+  let m2 = newM.serverMute;
+
+  let d1 = oldM.serverDeaf;
+  let d2 = newM.serverDeaf;
+
+  let ch = oldM.guild.channels.find('name', 'logs')
+  if(!ch) return;
+
+    oldM.guild.fetchAuditLogs()
+    .then(logs => {
+
+      let user = logs.entries.first().executor
+
+    if(m1 === false && m2 === true) {
+       let embed = new Discord.RichEmbed()
+       .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
+       .setDescription(`${newM} تم اعطاء ميوت صوتي ل`)
+       .setFooter(`بواسطة : ${user}`)
+
+       ch.send(embed)
+    }
+    if(m1 === true && m2 === false) {
+       let embed = new Discord.RichEmbed()
+       .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
+       .setDescription(`${newM} تم فك الميوت الصوتي عن`)
+       .setFooter(`بواسطة : ${user}`)
+       .setTimestamp()
+
+       ch.send(embed)
+    }
+    if(d1 === false && d2 === true) {
+       let embed = new Discord.RichEmbed()
+       .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
+       .setDescription(`${newM} تم غلق سماعات عن`)
+       .setFooter(`بواسطة : ${user}`)
+       .setTimestamp()
+
+       ch.send(embed)
+    }
+    if(d1 === true && d2 === false) {
+       let embed = new Discord.RichEmbed()
+       .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
+       .setDescription(`${newM} تم فتح السماعات عن`)
+       .setFooter(`بواسطة : ${user}`)
+       .setTimestamp()
+
+       ch.send(embed)
+    }
+  })
+})
+
+
+
+client.on('messageDelete', message => {
+    if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
+    const channel = message.guild.channels.find('name', 'logs');
+    if (!channel) return;
+   
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+       .setColor('BLACK')
+       .setDescription(`🗑️ **حذف رساله**
+**ارسلها <@${message.author.id}>                                                                                                                        تم حذفها في شات** <#${message.channel.id}>\n\n \`${message.cleanContent}\``)
+       .setTimestamp();
+     channel.send({embed:embed});
+ 
+});
+
+
+  client.on("guildBanAdd", (guild, member) => {
+  client.setTimeout(() => {
+    guild.fetchAuditLogs({
+        limit: 1,
+        type: 22
+      })
+      .then(audit => {
+        let exec = audit.entries.map(a => a.executor.username);
+        try {
+          let log = guild.channels.find('name', 'logs');
+          if (!log) return;
+          client.fetchUser(member.id).then(myUser => {
+          let embed = new Discord.RichEmbed()
+        .setAuthor(exec)
+        .setThumbnail(myUser.avatarURL)
+        .addField('- العضو الذي تم تبنيده :',`**${myUser.username}**`,true)
+        .addField('- بواسطة :',`**${exec}**`,true)
+        .setFooter(myUser.username,myUser.avatarURL)
+            .setTimestamp();
+          log.send(embed).catch(e => {
+            console.log(e);
+          });
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      });
+  }, 1000);
+});
+
+
+
+
+  client.on("roleUpdate", (re,updated) => {
+    client.setTimeout(() => {
+      re.guild.fetchAuditLogs({
+          limit: 1,
+          type: 30
+        })
+        .then(audit => {
+          let exec = audit.entries.map(a => a.executor.username)
+          try {
+  
+            let log = re.guild.channels.find('name', 'logs');
+            if (!log) return;
+            let embed = new Discord.RichEmbed()
+              .setColor('BLACK')
+              .setTitle("✏  Role Name Updated")
+              .addField("الاسم القديم",`${re.name}`,true)
+              .addField("الاسم الجديد",`${updated.name}`,true )
+              .addField("ايدي الرول",`${re.id}`,true )
+              .addField('بواسطة', exec, true)
+              .setTimestamp()
+            log.send(embed).catch(e => {
+              console.log(e);
+            });
+          } catch (e) {
+            console.log(e);
+          }
+        })
+    }, 1000)
+  })
+  
 
 
 
