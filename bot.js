@@ -71,7 +71,7 @@ Your Level : ${voice[message.member.id].level}`);
 
 
   var returned;
-hero.on('voiceStateUpdate', (user, member) => {
+client.on('voiceStateUpdate', (user, member) => {
   if(member.selfDeaf || member.selfMute || member.serverDeaf || member.serverMute) {
     returned = false;
   }
