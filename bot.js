@@ -216,8 +216,8 @@ let welcomer = member.guild.channels.find("name","welcome");
      welcomer.send({embed:bad});          
                
  
-      }
-      });
+  }); 
+});
 
 	
 
