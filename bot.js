@@ -169,7 +169,6 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return mess
 
 
 
-
 const invites = {};
 const wait = require('util').promisify(setTimeout);
 client.on('ready', () => {
@@ -191,7 +190,6 @@ client.on('guildMemberAdd', member => {
    //  yumz.send(`<@${member.user.id}> joined using invite code ${invite.code} from <@${inviter.id}>. Invite was used ${invite.uses} times since its creation.`);
   }); 
 });
-
 
 
 
