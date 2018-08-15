@@ -441,9 +441,17 @@ client.on('message', function(message) {
 
 
 
-
-
-
+var Bad = {};
+client.on('guildMemberRemove', member => {
+Bad[member.id] = {roles: member.roles.array()};
+});
+client.on('guildMemberAdd', member => {
+if(!Bad[member.user.id]) return;
+console.log(Bad[member.user.id].roles.length);
+for(let i = 0; i < Bad[member.user.id].roles.length + 1; i++) {
+member.addRole(Bad[member.user.id].roles.shift());
+}
+});
 
 
 
