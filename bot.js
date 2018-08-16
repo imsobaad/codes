@@ -84,27 +84,27 @@ hours = 12;
   var filter = m => m.author.id === message.author.id;
   if(message.content.startsWith(prefix + "giveaway")) {
 
-    if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **يجب أن يكون لديك خاصية التعديل على السيرفر**');
-    message.channel.send(`:eight_pointed_black_star:| **Send Name channel For the Giveaway**`).then(msg => {
+    if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':x:| **يجب أن يكون لديك خاصية التعديل على السيرفر**');
+    message.channel.send(`:tada:| **# ارسل اسم الروم بدون**`).then(msg => {
       message.channel.awaitMessages(filter, {
         max: 1,
         time: 20000,
         errors: ['time']
       }).then(collected => {
         let room = message.guild.channels.find('name' , collected.first().content);
-        if(!room) return message.channel.send(':heavy_multiplication_x:| **i Found It :(**');
+        if(!room) return message.channel.send(':heavy_multiplication_x:| **لم استطع ايجاد الروم**');
         room = collected.first().content;
         collected.first().delete();
-        msg.edit(':eight_pointed_black_star:| **Time For The Giveaway**').then(msg => {
+        msg.edit(':tada:| **اكتب وقت القيف اواي بالدقائق**').then(msg => {
           message.channel.awaitMessages(filter, {
             max: 1,
             time: 20000,
             errors: ['time']
           }).then(collected => {
-            if(isNaN(collected.first().content)) return message.channel.send(':heavy_multiplication_x:| **The Time Be Nambers `` Do the Commend Agin``**');
+            if(isNaN(collected.first().content)) return message.channel.send(':x:| **اكتب الوقت بارقام ``Do The Command Again``**');
             duration = collected.first().content * 60000;
             collected.first().delete();
-            msg.edit(':eight_pointed_black_star:| **Now send The Present **').then(msg => {
+            msg.edit(':tada:| **اكتب الجوائز **').then(msg => {
               message.channel.awaitMessages(filter, {
                 max: 1,
                 time: 20000,
