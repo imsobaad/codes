@@ -1626,8 +1626,6 @@ client.on('message', message => {
 	
 
 
-var prefix = '*';
-
 client.on('message', message => {
     if(message.content === prefix + 'ccolors') {
                          if(!message.channel.guild) return message.channel.send('**This Commnad only For Servers !**'); 
