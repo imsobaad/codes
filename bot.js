@@ -204,7 +204,7 @@ message.channel.send({embed});
 client.on('message', async message =>{
 const ms = require("ms");
 if (message.author.omar) return;
-if (!message.content.startsWith(prefix)) return;
+if (!message.content.startsWith(prefix + 'mute')) return;
 if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) 
 	return message.reply("**لا تستطيع اعطاء ميوت لاحد الادارة**").then(msg => msg.delete(6000))
 var command = message.content.split(" ")[0];
