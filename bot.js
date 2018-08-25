@@ -199,6 +199,8 @@ message.channel.send({embed});
 });
 
 
+
+
 client.on('message', async message =>{
 const ms = require("ms");
 if (message.author.omar) return;
