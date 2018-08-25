@@ -292,6 +292,8 @@ client.on("guildMemberAdd", member => {
       }
       });
 
+
+
 	
 
 
