@@ -290,6 +290,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return mess
 
 
 
+
 client.on("guildMemberAdd", member => {
 let welcomer = member.guild.channels.find("name","welcome");
       if(!welcomer) return;
@@ -299,16 +300,13 @@ let welcomer = member.guild.channels.find("name","welcome");
         let norelden = new Discord.RichEmbed()
         .setColor('RANDOM')
         .setThumbnail(h.avatarURL)
-        .addField('Created Date :',`${moment(member.user.createdAt).format('D/M/YYYY HH:mm')` **\n** \`${moment(member.user.createdAt).fromNow()}\``)
+        .addField('Created Date :',`${moment(member.user.createdAt).format('D/M/YYYY HH:mm:ss')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)
          .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
      welcomer.send({embed:norelden});          
                
  
       }
       });
-
-
-
 
 	
 
