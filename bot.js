@@ -150,20 +150,6 @@ hours = 12;
 
 
 
-client.on('message', message => {
-    if(message.content.includes('discord.me')){
-                                            if(!message.channel.guild) return message.reply('** advertising me on DM ? 🤔   **');
-        if (!message.member.hasPermissions(['ADMINISTRATOR'])){
-        message.delete()
-    return message.reply(`** No Invite Links :angry: !**`)
-    }
-}
-});
-
-
-
-
-
    client.on('message', message => {
     const prefix = '*'
 var args = message.content.split(" ").slice(1);    
