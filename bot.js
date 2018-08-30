@@ -31,7 +31,6 @@ const sql = require("sqlite");
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`Use *help`,"http://twitch.tv/S-F")
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
@@ -135,7 +134,7 @@ hours = 12;
                      },duration);
                    });
                 } catch(e) {
-                message.channel.send(`:heavy_multiplication_x:| **i Don't Have Prem**`);
+                message.channel.send(`:heavy_multiplication_x:| **i Don't Have Prems**`);
                   console.log(e);
                 }
               });
@@ -146,6 +145,29 @@ hours = 12;
     });
   }
 });
+
+
+
+
+client.on('ready', function(){
+  client.user.setStatus("dnd");
+    var ms = 40000 ;	
+    var setGame = ['*help','*invite'];	
+    var i = -1;	
+    var j = 0;	
+    setInterval(function (){	
+        if( i == -1 ){	
+j = 1;	
+       }	
+        if( i == (setGame.length)-1 ){	
+            j = -1;	
+      }	
+       i = i+j;	
+        client.user.setGame(setGame[i],`http://www.youtube.com/gg`);	
+}, ms);	
+	
+});
+
 
 
 
