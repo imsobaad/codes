@@ -353,26 +353,16 @@ ${prefix}staff ⥨ اوامر الادارة
 ${prefix}games ⥨ اوامر الالعاب
 ${prefix}music ⥨ اوامر الموسيقى
 
+Other Commands :
+
+${prefix}invite ⥨ لدعوة البوت الى سيرفرك
+${prefix}support ⥨ لدخول سيرفر الدعم
 `)
    message.channel.sendEmbed(embed)
     
    }
    }); 
    
-
-
-client.on('message', message => {
-            if (message.content.startsWith(prefix + "help")) {
-     let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.addField('     ***general** ' ,' **الاوامر العامة** ')
-.addField('     ***staff**  ' ,' **اوامر الادارة** ')
-.addField('     ***music** ' , '**اوامر الموسيقى**') 
-.addField('     ***games** ' , '**اوامر الالعاب**') 
-.setColor('#7d2dbe')
-  message.channel.sendEmbed(embed);
-    }
-});
 
 
 
