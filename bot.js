@@ -361,6 +361,19 @@ ${prefix}music ⥨ اوامر الموسيقى
    
 
 
+client.on('message', message => {
+            if (message.content.startsWith(prefix + "help")) {
+     let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.addField('     ***general** ' ,' **الاوامر العامة** ')
+.addField('     ***staff**  ' ,' **اوامر الادارة** ')
+.addField('     ***music** ' , '**اوامر الموسيقى**') 
+.addField('     ***games** ' , '**اوامر الالعاب**') 
+.setColor('#7d2dbe')
+  message.channel.sendEmbed(embed);
+    }
+});
+
 
 
 
