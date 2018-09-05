@@ -153,41 +153,6 @@ hours = 12;
 
 
 
-client.on("message", message => {
-if (message.content === ("*serverstates")) {
-let channel = message.client.channels.find('name', "member");
-let muteRole = client.guilds.get(message.guild.id).channels.find('name', 'member');
-if (!muteRole) return message.reply("** member قم بانشاء روم باسم **").catch(console.error);
-if(!message.channel.guild) return message.reply('**Commands in the server**');
-if(!message.member.hasPermission('ADMINISTRATOR')) return    message.channel.send('**ليس لديك برمشن** `ADMINISTRATOR`' );
-channel.edit({name : `memberCount「${message.guild.memberCount}」`});
-message.channel.sendMessage("تم تفعيل الروم بنجاح")
-      
-  }
-});
-
-
-
-
-
-client.on("message", message => {
-if (message.content === ("*serverstates")) {
-let channel = message.client.channels.find('name', "bot");
-let muteRole = client.guilds.get(message.guild.id).channels.find('name', 'bot');
-if (!muteRole) return message.reply("** bot قم بانشاء روم باسم **").catch(console.error);
-if(!message.channel.guild) return message.reply('**Commands in the server**');
-if(!message.member.hasPermission('ADMINISTRATOR')) return    message.channel.send('**ليس لديك برمشن** `ADMINISTRATOR`' );
-channel.edit({name : `memberCount「${message.guild.members.filter(m => m.user.bot).size}」`});
-message.channel.sendMessage("تم تفعيل الروم بنجاح")
-      
-  }
-});
-
-
-
-
-
-
    client.on('message', message => {
     const prefix = '*'
 var args = message.content.split(" ").slice(1);    
