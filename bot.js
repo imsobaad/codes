@@ -154,7 +154,7 @@ hours = 12;
 
 
 client.on("message", message => {
-if (message.content === ("*cmembers")) {
+if (message.content === ("*serverstates")) {
 let channel = message.client.channels.find('name', "member");
 let muteRole = client.guilds.get(message.guild.id).channels.find('name', 'member');
 if (!muteRole) return message.reply("** member قم بانشاء روم باسم **").catch(console.error);
@@ -171,7 +171,7 @@ message.channel.sendMessage("تم تفعيل الروم بنجاح")
 
 
 client.on("message", message => {
-if (message.content === ("*cbots")) {
+if (message.content === ("*serverstates")) {
 let channel = message.client.channels.find('name', "bot");
 let muteRole = client.guilds.get(message.guild.id).channels.find('name', 'bot');
 if (!muteRole) return message.reply("** bot قم بانشاء روم باسم **").catch(console.error);
