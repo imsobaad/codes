@@ -1766,7 +1766,7 @@ client.on('message', message => {
 client.on('message', message => {
          if (message.content === '*colorslist') {
       if (!message.channel.guild) return;
-    message.channel.sendFile('https://c.top4top.net/p_774o4pw41.png');
+    message.channel.sendFile('https://c.top4top.net/p_774o4pw41.png','https://a.top4top.net/p_979xsxhp1.png','https://e.top4top.net/p_979czndu1.png','https://f.top4top.net/p_979a0xp01.png');
   }
 	
 });
