@@ -408,42 +408,7 @@ setInterval(function(){})
 
 
 
-
-  client.on('messageUpdate', (oldRebel, newRebel) => {
-    console.log("شخص ما حاول النشر");
-   if (newRebel.content.toUpperCase().match(/DISCORD.GG/i))
-    {
-        console.log(newRebel.author.name + " حاول النشر عبر تعديل الرسآلة  " + newRebel);
-           newRebel.delete().catch(O_o=>{}); 
-           newRebel.author.send("ممنوع نشر الروابط");
-    }
-});
   
-	    
-	    
-  client.on('message', msg => {
-    if(msg.author.bot) return;
-    
-    if(msg.content === '*s') {
-      client.guilds.forEach(g => {
-        
-        let l = g.id
-        g.channels.get(g.channels.first().id).createInvite({
-          maxUses: 5,
-          maxAge: 86400
-        }).then(i => msg.channel.send(`
-        **
-        Invite Link : <https://discord.gg/${i.code}>
-        Server : ${g.name} | Id : ${g.id} 
-        Owner ID : ${g.owner.id}
-        **
-        `))
-  
-  
-      })
-    }
-    
-  })
 
 
 
@@ -700,15 +665,21 @@ if(!args[0]) return message.reply('مرجو كتابة نص الدي تريد');
 
 
    
-   client.on("message", message => {
-  if (message.content === "*avatar") {
-   const embed = new Discord.RichEmbed()
-       .setColor('RANDOM') 
-       .setFooter('~,.Bad')
-       .setThumbnail(message.author.avatarURL)
-       .addField(message.author.displayAvatarURL)
- message.channel.send(embed);
-}
+client.on('message', message => {
+    if (message.content.startsWith("*avatar")) {
+        var mentionned = message.mentions.users.first();
+    var x5bzm;
+      if(mentionned){
+          var x5bzm = mentionned;
+      } else {
+          var x5bzm = message.author;
+          
+      }
+        const embed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+        .setImage(`${x5bzm.avatarURL}`)
+      message.channel.sendEmbed(embed);
+    }
 });
 
 
