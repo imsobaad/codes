@@ -203,18 +203,6 @@ message.channel.send({embed});
 
 
 
-client.on('message', message => {
-       if (message.content.startsWith(prefix + 's')) {
-     let msg =  client.guilds.map(guild => `**${guild.name}** عدد الاعضاء: ${guild.memberCount}`).join('\n');
-  let embed = new Discord.RichEmbed()
-  .setTitle(`${client.guilds.size}سيرفرات `)
-  .setDescription(`${msg}`)
-  .setColor("#ebf442");
-  message.channel.send(embed);
-}
-});
-
-
 
 
 
@@ -244,8 +232,9 @@ client.on('message', async message =>{
 const ms = require("ms");
 if (message.author.omar) return;
 if (!message.content.startsWith(prefix + 'mute')) return;
-if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) 
+if(!message.member.hasPermission("MANAGE_ROLES")) 
 	return message.reply("**لا تستطيع اعطاء ميوت لاحد الادارة**").then(msg => msg.delete(6000))
+
 var command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
 var args = message.content.split(" ").slice(1);
