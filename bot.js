@@ -232,8 +232,8 @@ client.on('message', async message =>{
 const ms = require("ms");
 if (message.author.omar) return;
 if (!message.content.startsWith(prefix + 'mute')) return;
-if(!message.member.hasPermission("MANAGE_ROLES")) 
-	return message.reply("**لا تستطيع اعطاء ميوت لاحد الادارة**").then(msg => msg.delete(6000))
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) 
+	return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
 
 var command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
