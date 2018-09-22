@@ -95,6 +95,28 @@ client.on('message',async message => {
     }
   });
 
+  client.on('message',async message => {
+    if(message.content.startsWith(prefix + "setDate")) {
+        var currentTime = new Date(),
+        years = currentTime.getFullYear(),
+        month = currentTime.getMonth() + 1,
+        day = currentTime.getDate(),
+        week = currentTime.getDay();
+    if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('❌ **ليس لديك الصلاحيات الكافية**');
+    if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('❌ **ليس معي الصلاحيات الكافية**');
+    message.channel.send('✅| **تم عمل الروم بنجاح**');
+    message.guild.createChannel("📅 - Date " + "「" + day + "-" + month + "-" + years + "」" , 'voice').then(c => {
+      console.log(`Date channel setup for guild: \n ${message.guild.name}`);
+      c.overwritePermissions(message.guild.id, {
+        CONNECT: false,
+        SPEAK: false
+      });
+      setInterval(function() {
+        c.setName("📅 - Date " + "「" + day + "-" + month + "-" + years + "」")
+      },1000);
+    });
+    }
+  });
 
 
 
