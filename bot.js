@@ -57,25 +57,6 @@ client.user.setGame(`Use *help`,"http://twitch.tv/S-F")
 
 
 
-client.on('message',message=>{
-if(message.guild) return;
-if(message.content.startsWith(prefix + 'chrole')){
-var mess=message.content.toLowerCase();
-var rr=msg.split(' ').slice(1).join(" ").toLowerCase();
-var hex=msg.split(' ').slice(2).join(" ").toLowerCase();
-var role=message.guild.roles.filter(r=>r.name.toLowerCase().indexOf(rr)>-1).first();
-if(!role) return message.channel.send('الرجاء التأكد من أسم الرتبة');
-if(!hex) return message.channel.send('أكتب لون الرتبة');
-var er=message.guild.roles.find('disco',role);
-er.edit({
-color: hex
-})
-}
-});
-
-
-
-
 
 
 client.on('message',async message => {
