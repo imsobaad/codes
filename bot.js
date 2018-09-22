@@ -66,7 +66,7 @@ var hex=msg.split(' ').slice(2).join(" ").toLowerCase();
 var role=message.guild.roles.filter(r=>r.name.toLowerCase().indexOf(rr)>-1).first();
 if(!role) return message.channel.send('الرجاء التأكد من أسم الرتبة');
 if(!hex) return message.channel.send('أكتب لون الرتبة');
-var er=message.guild.roles.find('name',role);
+var er=message.guild.roles.find('disco',role);
 er.edit({
 color: hex
 })
