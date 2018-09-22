@@ -202,22 +202,28 @@ message.channel.send({embed});
 
 
 client.on('message', message => {
-    if (message.author.bot) return;
     if (message.content.startsWith("*avatar")) {
+        if (message.author.bot) return
         var mentionned = message.mentions.users.first();
-    var x5bzm;
+    var omar;
       if(mentionned){
-          var x5bzm = mentionned;
+          var omar = mentionned;
       } else {
-          var x5bzm = message.author;
+          var omar = message.author;
           
       }
         const embed = new Discord.RichEmbed()
         .setColor("RANDOM")
-        .setImage(`${x5bzm.avatarURL}`)
+        .setAuthor('Avatar Link :')
+        .setTitle('Click Here')
+        .setURL(`${omar.avatarURL}`)
+        .setImage(`${omar.avatarURL}`)
+        .setFooter('bot name',client.user.avatarURL) 
       message.channel.sendEmbed(embed);
     }
 });
+
+
 
 
 
@@ -280,24 +286,6 @@ setTimeout(function(){
 
 
 
-  client.on('message', async message => {
-  if(message.content.startsWith(prefix + "sugg")) {
-  await  message.channel.send(`اكتب اقتراحك الان`)
-    let filter = m => m.author.id === message.author.id
-      var text = '';
-        let sugsa = message.channel.awaitMessages(filter, { max: 1, time: 60000})
-          .then(co => {
-            text = co.first().content
-
-              message.channel.send(`تم حفظ اقتراحك الرجاء انتضار الرد من قبل الاداره`)
-                client.channels.get("470260449074741249").send(`${message.author.username}'s sug => ${text}`)
-
-              })
-            }
-          })
-
-
-
 
 
 client.on("guildMemberAdd", member => {
@@ -318,6 +306,26 @@ let welcomer = member.guild.channels.find("name","welcome");
       });
 
 	
+
+
+
+client.on('guildMemberAdd', member => {
+  member.guild.fetchInvites().then(guildInvites => {
+    const ei = invites[member.guild.id];
+    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
+    const inviter = client.users.get(invite.inviter.id);
+    const stewart = member.guild.channels.find("name", "welcome");
+     stewart.send(`**__Welcome To Our Server <@${member.user.id}> __**
+**Invited By <@${inviter.id}> ( {invite.uses} ) **`);
+   //  stewart.send(`<@${member.user.id}> joined using invite code ${invite.code} from <@${inviter.id}>. Invite was used ${invite.uses} times since its creation.`);
+  }); 
+});
+
+
+
+
+
+
 
 
 client.on('message', function(msg) {
