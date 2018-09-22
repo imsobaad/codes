@@ -265,25 +265,23 @@ message.channel.send({embed});
 
 
 
-
 client.on('message', message => {
     if (message.content.startsWith("*avatar")) {
-        if (message.author.bot) return
         var mentionned = message.mentions.users.first();
-    var omar;
+    var x5bzm;
       if(mentionned){
-          var omar = mentionned;
+          var x5bzm = mentionned;
       } else {
-          var omar = message.author;
+          var x5bzm = message.author;
           
       }
         const embed = new Discord.RichEmbed()
         .setColor("RANDOM")
-        .setAuthor('Avatar Link :')
-        .setTitle('Click Here')
-        .setURL(`${omar.avatarURL}`)
-        .setImage(`${omar.avatarURL}`)
-        .setFooter('bot name',client.user.avatarURL) 
+	.setAuthor('Avatar Link :')
+        .setTitle(`Click Here`)
+        .setURL(`${x5bzm.avatarURL}`)
+	.setImage(`${x5bzm.avatarURL}`)
+	.setFooter('King Bot',x5bzm.user.avatarURL)
       message.channel.sendEmbed(embed);
     }
 });
