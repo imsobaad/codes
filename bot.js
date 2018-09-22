@@ -305,23 +305,6 @@ let welcomer = member.guild.channels.find("name","welcome");
       }
       });
 
-	
-
-
-
-client.on('guildMemberAdd', member => {
-  member.guild.fetchInvites().then(guildInvites => {
-    const ei = invites[member.guild.id];
-    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
-    const inviter = client.users.get(invite.inviter.id);
-    const stewart = member.guild.channels.find("name", "welcome");
-     stewart.send(`Invited By <@${inviter.id}>`);
-   //  stewart.send(`<@${member.user.id}> joined using invite code ${invite.code} from <@${inviter.id}>. Invite was used ${invite.uses} times since its creation.`);
-  }); 
-});
-
-
-
 
 
 
@@ -349,36 +332,6 @@ client.on('message', function(msg) {
   });    
 
 
-
-
-
-
-
-
-
-client.on("message", message => {
-	var prefix = "*";
- if (message.content === "*help") {
-  const embed = new Discord.RichEmbed()  
-      .setColor("#8325c0") 
-      .setDescription(`
-	  
-	       Help Commands: 
-			 
-${prefix}general ⥨ الاوامر العامة
-${prefix}staff ⥨ اوامر الادارة	 
-${prefix}games ⥨ اوامر الالعاب
-${prefix}music ⥨ اوامر الموسيقى
-
-Other Commands :
-
-${prefix}invite ⥨ لدعوة البوت الى سيرفرك
-${prefix}support ⥨ لدخول سيرفر الدعم
-`)
-   message.channel.sendEmbed(embed)
-    
-   }
-   }); 
    
 
 
