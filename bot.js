@@ -769,10 +769,10 @@ let PREFIX = '*'
   if(message.content.startsWith(prefix + "bot")) {
     let ramUsage = (process.memoryUsage().rss / 1048576).toFixed();
     let upTime = timeCon(process.uptime());
-    let createdAt = moment(hero.user.createdAt).fromNow();
+    let createdAt = moment(client.user.createdAt).fromNow();
 
 let m = await message.channel.send(`\`\`\`asciidoc\n= Normal Information =
-Creator :: ${hero.users.get("323885452207587329").username} - ${createdAt}
+Creator :: ${client.users.get("486200045008453635").username} - ${createdAt}
 Ping :: ${client.pings[0]} ms
 UpTime :: ${upTime}
 
