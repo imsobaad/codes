@@ -689,7 +689,8 @@ client.on('message', message => {
   client.on('message', message => {
        if(message.content.startsWith(`*invite`)){ //GSU
            var embed = new Discord.RichEmbed() //GSU
-           .setTitle("Invite Me") //GSU
+           .setAuthor(message.author.username, message.author.avatarURL) //POWER
+	   .setTitle("Invite Me") //GSU
            .setFooter(`King Bot `,'https://cdn.discordapp.com/attachments/494148570094632961/494590923620089857/Kingbot.png')
            .setURL("https://goo.gl/ADmgeW") //GSU
            .setTimestamp() //GSU
