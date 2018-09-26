@@ -265,27 +265,12 @@ message.channel.send({embed});
 
 
 
-client.on('message', message => {
+ client.on('message', message => {
+        var  user = message.mentions.users.first() || message.author;
     if (message.content.startsWith("*avatar")) {
-        var mentionned = message.mentions.users.first();
-    var x5bzm;
-      if(mentionned){
-          var x5bzm = mentionned;
-      } else {
-          var x5bzm = message.author;
-          
-      }
-        const embed = new Discord.RichEmbed()
-        .setColor("RANDOM")
-	.setAuthor('Avatar Link :')
-        .setTitle(`Click Here`)
-        .setURL(`${x5bzm.avatarURL}`)
-	.setImage(`${x5bzm.avatarURL}`)
-	.setFooter('King Bot',x5bzm.user.avatarURL)
-      message.channel.sendEmbed(embed);
-    }
+message.channel.send(`${user}'s Avatar link : ${user.avatarURL}`);
+}
 });
-
 
 
 
@@ -701,27 +686,51 @@ if (message.content.startsWith(prefix + 'trans')) {
 
 
 
-
-
-
-
-  
-  
-  
 client.on('message', message => {
-                if(message.content === prefix + "invite") {
-                    let embed = new Discord.RichEmbed ()
-                    embed.setTitle("**:point_right: Click Here**")
-                  .setFooter(`King Bot `,'https://cdn.discordapp.com/attachments/457004554869932033/471106003249659914/image.jpg')
-                  .setURL("https://goo.gl/ADmgeW");
-                   message.channel.sendEmbed(embed);
-                  }
-});
+       if(message.content.startsWith(`*support`)){ //GSU 
+           var embed = new Discord.RichEmbed() //GSU
+           .setTitle("Support Server") //GSU
+           .setURL("https://discord.gg/p2sjgAw") //GSU
+           .setTimestamp() //POWER
+           .setColor("RANDOM") //GSU
+           message.channel.send({embed}) //GSU
+       }
+   });
+
+
+
+
+
   
   
   
+  client.on('message', message => {
+       if(message.content.startsWith(`*inv`)){ //GSU
+           var embed = new Discord.RichEmbed() //GSU
+           .setTitle("Invite Me") //GSU
+           .setURL("https://goo.gl/ADmgeW") //GSU
+           .setTimestamp() //GSU
+           .setColor("RANDOM") //GSU
+           message.channel.send({embed}) //GSU
+       }
+   });
+
   
-  
+
+
+  client.on('message', message => {
+       if(message.content.startsWith(`*invite`)){ //GSU
+           var embed = new Discord.RichEmbed() //GSU
+           .setTitle("Invite Me") //GSU
+           .setURL("https://goo.gl/ADmgeW") //GSU
+           .setTimestamp() //GSU
+           .setColor("RANDOM") //GSU
+           message.channel.send({embed}) //GSU
+       }
+   });
+
+
+
   
   
   client.on("message", message => {
