@@ -718,6 +718,27 @@ client.on('message', message => {
 
 
 
+
+client.on('message',async king => { //POWER
+    if(king.content.startsWith(prefix + "server")) { //POWER
+      let embed = new Discord.RichEmbed() //POWER
+      .setAuthor(king.author.username, king.author.avatarURL) //POWER
+      .setTitle(`\`${king.guild.name}\``) //POWER
+      .setThumbnail(king.guild.iconURL) //POWER
+      .addField('• اي دي:', `- ${king.guild.id}`,true) //POWER
+      .addField('• الاونر شيب:', `- ${king.guild.owner}`, true) //POWER
+      .addField('• عدد الرومات:', `\`#\` ${king.guild.channels.filter(a => a.type === 'text').size} - \`🎤\` ${king.guild.channels.filter(a => a.type === 'voice').size}`, true) //POWER
+      .addField('• عدد الاشخاص:', `\`Count\` ${king.guild.memberCount} - \`Last\` ${Array.from(king.channel.guild.members.values()).sort((a, b) => b.joinedAt - a.joinedAt).map(m => `${m}`).splice(0, 1)}`, true) //POWER
+      .addField('• روم الAFK:', `${king.guild.afkChannel || 'None'}`, true) //POWER
+      .addField('• اخر:', `\`Roles\` ${king.guild.roles.size} - \`Emojis\` ${king.guild.emojis.size} \`[\` ${king.guild.emojis.map(m => m).join(' **|** ')} \`]\``,true) //POWER
+      .addField('• مكان السيرفر:', `${king.guild.region}`, true); //POWER
+  
+      king.channel.send(embed); //POWER
+    }
+  });
+
+
+
   
   
   client.on("message", message => {
@@ -750,51 +771,6 @@ let PREFIX = '*'
   
 
 
-
-  client.on('message',async message => {
-  function timeCon(time) {
-  let days = Math.floor(time % 31536000 / 86400);
-  let hours = Math.floor(time % 31536000 % 86400 / 3600);
-  let minutes = Math.floor(time % 31536000 % 86400 % 3600 / 60);
-  let seconds = Math.round(time % 31536000 % 86400 % 3600 % 60);
-  days = days > 9 ? days : '0' + days;
-  hours = hours > 9 ? hours : '0' + hours;
-  minutes = minutes > 9 ? minutes : '0' + minutes;
-  seconds = seconds > 9 ? seconds : '0' + seconds;
-  return `${days > 0 ? `${days} Days ` : ''}${(hours || days) > 0 ? `${hours} Hours ` : ''}${minutes} Mins ${seconds} Secs`;
-  }
-  
-  if(message.author.bot) return;
-  if(message.channel.type === 'dm') return;
-  if(message.content.startsWith(prefix + "bot")) {
-    let ramUsage = (process.memoryUsage().rss / 1048576).toFixed();
-    let upTime = timeCon(process.uptime());
-    let createdAt = moment(client.user.createdAt).fromNow();
-
-let m = await message.channel.send(`\`\`\`asciidoc\n= Normal Information =
-Creator :: ${client.users.get("486200045008453635").username} - ${createdAt}
-Ping :: ${client.pings[0]} ms
-UpTime :: ${upTime}
-
-= Servers Information =
-Servers :: ${client.guilds.size}
-Users :: ${client.users.size}
-Channels :: ${client.channels.size}
-
-= Developer Information =
-NodeJS :: ${process.version}
-DiscordJS :: ${Discord.version}
-Arch :: ${process.arch}
-Platform :: ${process.platform}
-
-= Host Information =
-UsedHeap :: ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100} MB
-Heap :: ${Math.round(process.memoryUsage().heapTotal / 1024 / 1024 * 100) / 100} MB
-Ram :: ${ramUsage} MB
-Rss :: ${Math.round(process.memoryUsage().rss / 1024 / 1024 * 100) / 100} MB
-\`\`\``);
-  }
-});
 
 
 
