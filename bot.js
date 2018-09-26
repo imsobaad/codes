@@ -751,7 +751,7 @@ let PREFIX = '*'
 
 
 
-  hero.on('message',async message => {
+  client.on('message',async message => {
   function timeCon(time) {
   let days = Math.floor(time % 31536000 / 86400);
   let hours = Math.floor(time % 31536000 % 86400 / 3600);
@@ -773,13 +773,13 @@ let PREFIX = '*'
 
 let m = await message.channel.send(`\`\`\`asciidoc\n= Normal Information =
 Creator :: ${hero.users.get("323885452207587329").username} - ${createdAt}
-Ping :: ${hero.pings[0]} ms
+Ping :: ${client.pings[0]} ms
 UpTime :: ${upTime}
 
 = Servers Information =
-Servers :: ${hero.guilds.size}
-Users :: ${hero.users.size}
-Channels :: ${hero.channels.size}
+Servers :: ${client.guilds.size}
+Users :: ${client.users.size}
+Channels :: ${client.channels.size}
 
 = Developer Information =
 NodeJS :: ${process.version}
