@@ -670,7 +670,8 @@ client.on('message', message => {
        if(message.content.startsWith(`*support`)){ //GSU 
            var embed = new Discord.RichEmbed() //GSU
            .setAuthor(message.author.username, message.author.avatarURL) //POWER
-	   .setTitle("Support Server") //GSU
+	   .setTitle("**Support Server**") //GSU
+	   .setThumbnail(message.author.iconURL) //POWER
            .setFooter(`King Bot `,'https://cdn.discordapp.com/attachments/494148570094632961/494590923620089857/Kingbot.png')
            .setURL("https://discord.gg/p2sjgAw") //GSU
            .setTimestamp() //POWER
@@ -692,7 +693,7 @@ client.on('message', message => {
            var embed = new Discord.RichEmbed() //GSU
            .setAuthor(message.author.username, message.author.avatarURL) //POWER
 	   .setTitle("**Invite Me**") //GSU
-	   .setThumbnail(message.guild.iconURL) //POWER
+	   .setThumbnail(message.author.iconURL) //POWER
            .setFooter(`King Bot `,'https://cdn.discordapp.com/attachments/494148570094632961/494590923620089857/Kingbot.png')
            .setURL("https://goo.gl/ADmgeW") //GSU
            .setTimestamp() //GSU
