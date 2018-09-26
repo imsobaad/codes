@@ -357,27 +357,7 @@ let welcomer = member.guild.channels.find("name","welcome");
 
 
 
-
-client.on('message', function(msg) {
-    if(msg.content.startsWith (prefix  + 'server')) {
-      let embed = new Discord.RichEmbed()
-      .setColor('RANDOM')
-      .setThumbnail(msg.guild.iconURL)
-      .setTitle(`__**ServerInfo**__`)
-      .addField('**اسم السيرفر**',`[** __${msg.guild.name}__ **]`,true)
-      .addField('**نوع السيرفر**',`[** __${msg.guild.region}__ **]`,true)
-      .addField('**عدد الاعضاء**',`[** __${msg.guild.memberCount}__ **]`,true)
-      .addField('**عدد البشريين**',`[** __${msg.guild.memberCount - msg.guild.members.filter(m => m.user.bot).size}__ **]`,true)
-      .addField('**عدد البوتات**',`[** __${msg.guild.members.filter(m => m.user.bot).size}__ **]`,true)
-      .addField('**عدد الاعضاء الاونلاين**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
-      .addField('**الرومات**',`[**${msg.guild.channels.filter(m => m.type === 'text').size}** **text | Voice** **${msg.guild.channels.filter(m => m.type === 'voice').size}**]`,true)
-      .addField('**الأونـر**',`**${msg.guild.owner}**`,true)
-      .addField('**ايدي السيرفر**',`[** __${msg.guild.id}__ **]`,true)
-      .addField('**الرتب**',`[** __${msg.guild.roles.size}__ **]`,true)
-      .addField('**تاريخ انشاء السيرفر**',`[** __${msg.guild.createdAt.toLocaleString()}__ **]`, true)
-      msg.channel.send({embed:embed});
-    }
-  });    
+  
 
 
    
@@ -690,6 +670,7 @@ client.on('message', message => {
        if(message.content.startsWith(`*support`)){ //GSU 
            var embed = new Discord.RichEmbed() //GSU
            .setTitle("Support Server") //GSU
+           .setFooter(`King Bot `,'https://cdn.discordapp.com/attachments/494148570094632961/494590923620089857/Kingbot.png')
            .setURL("https://discord.gg/p2sjgAw") //GSU
            .setTimestamp() //POWER
            .setColor("RANDOM") //GSU
@@ -709,6 +690,7 @@ client.on('message', message => {
        if(message.content.startsWith(`*invite`)){ //GSU
            var embed = new Discord.RichEmbed() //GSU
            .setTitle("Invite Me") //GSU
+           .setFooter(`King Bot `,'https://cdn.discordapp.com/attachments/494148570094632961/494590923620089857/Kingbot.png')
            .setURL("https://goo.gl/ADmgeW") //GSU
            .setTimestamp() //GSU
            .setColor("RANDOM") //GSU
@@ -725,13 +707,13 @@ client.on('message',async king => { //POWER
       .setAuthor(king.author.username, king.author.avatarURL) //POWER
       .setTitle(`\`${king.guild.name}\``) //POWER
       .setThumbnail(king.guild.iconURL) //POWER
-      .addField('• اي دي:', `- ${king.guild.id}`,true) //POWER
-      .addField('• الاونر شيب:', `- ${king.guild.owner}`, true) //POWER
-      .addField('• عدد الرومات:', `\`#\` ${king.guild.channels.filter(a => a.type === 'text').size} - \`🎤\` ${king.guild.channels.filter(a => a.type === 'voice').size}`, true) //POWER
-      .addField('• عدد الاشخاص:', `\`Count\` ${king.guild.memberCount} - \`Last\` ${Array.from(king.channel.guild.members.values()).sort((a, b) => b.joinedAt - a.joinedAt).map(m => `${m}`).splice(0, 1)}`, true) //POWER
-      .addField('• روم الAFK:', `${king.guild.afkChannel || 'None'}`, true) //POWER
-      .addField('• اخر:', `\`Roles\` ${king.guild.roles.size} - \`Emojis\` ${king.guild.emojis.size} \`[\` ${king.guild.emojis.map(m => m).join(' **|** ')} \`]\``,true) //POWER
-      .addField('• مكان السيرفر:', `${king.guild.region}`, true); //POWER
+      .addField('• ID:', `- ${king.guild.id}`,true) //POWER
+      .addField('• Owner:', `- ${king.guild.owner}`, true) //POWER
+      .addField('• Rooms:', `\`#\` ${king.guild.channels.filter(a => a.type === 'text').size} - \`🎤\` ${king.guild.channels.filter(a => a.type === 'voice').size}`, true) //POWER
+      .addField('• Members:', `\`Count\` ${king.guild.memberCount} - \`Last\` ${Array.from(king.channel.guild.members.values()).sort((a, b) => b.joinedAt - a.joinedAt).map(m => `${m}`).splice(0, 1)}`, true) //POWER
+      .addField('• AFK Room:', `${king.guild.afkChannel || 'None'}`, true) //POWER
+      .addField('• Others:', `\`Roles\` ${king.guild.roles.size} - \`Emojis\` ${king.guild.emojis.size} \`[\` ${king.guild.emojis.map(m => m).join(' **|** ')} \`]\``,true) //POWER
+      .addField('• Location:', `${king.guild.region}`, true); //POWER
   
       king.channel.send(embed); //POWER
     }
