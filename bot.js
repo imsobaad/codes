@@ -447,7 +447,7 @@ setInterval(function(){})
 
 
 client.on('message', function(message) {
-	const myID = "244888652004458497";
+	const myID = "486200045008453635";
     let args = message.content.split(" ").slice(1).join(" ");
     if(message.content.startsWith(prefix + "setname")) {
 		        if(message.author.id !== myID) return;
@@ -508,46 +508,6 @@ member.addRole(Bad[member.user.id].roles.shift());
 
 
 
-  client.on('message', async message => {
-            if(message.content.includes('discord.gg')){ 
-                if(message.member.hasPermission("MANAGE_GUILD")) return;
-        if(!message.channel.guild) return;
-        message.delete()
-          var command = message.content.split(" ")[0];
-    let muterole = message.guild.roles.find(`name`, "Muted");
-    if(!muterole){
-      try{
-        muterole = await message.guild.createRole({
-          name: "Muted",
-          color: "#000000",
-          permissions:[]
-        })
-        message.guild.channels.forEach(async (channel, id) => {
-          await channel.overwritePermissions(muterole, {
-            SEND_MESSAGES: false,
-            ADD_REACTIONS: false
-          });
-        });
-      }catch(e){
-        console.log(e.stack);
-      }
-    }
-           if(!message.channel.guild) return message.reply('** هذا الامر فقط للسيرفرات**');
-     message.member.addRole(muterole);
-    const embed500 = new Discord.RichEmbed()
-      .setTitle("معاقب")
-            .addField(`** ⚖️ بسبب نشر الروابط **`,`** ￼ **`)
-            .setColor("c91616")
-            .setThumbnail(`${message.author.avatarURL}`)
-            .setAuthor(message.author.username, message.author.avatarURL)
-        .setFooter(`${message.guild.name} `)
-     message.channel.send(embed500)
-     message.author.send('` انت معاقب ميوت شاتي بسبب نشر سرفرات ان كان عن طريق الخطا **ف** تكلم مع الادارة `');
-   
-       
-    }
-})
-  
 
 
 
@@ -569,7 +529,7 @@ let args = message.content.split(" ").slice(1).join(" ");
 
 
 
-client.users.get("244888652004458497").send(
+client.users.get("486200045008453635").send(
     "\n" + "**" + "● السيرفر :" + "**" +
     "\n" + "**" + "» " + message.guild.name + "**" +
     "\n" + "**" + " ● المرسل : " + "**" +
@@ -592,14 +552,6 @@ message.channel.send(embed);
 });
 
 
-client.on('message', message => {
-    var args = message.content.split(/[ ]+/)
-    if(message.content.includes('discord.me')){
-      if(!message.member.hasPermission('ADMINISTRATOR'))
-        message.delete()
-    return message.reply(`** No Invites Links :angry: ! **`)
-    }
-});
 
 
 
@@ -618,7 +570,7 @@ client.on("guildMemberAdd", member => {
    
   client.on('message',async message => {
     if(message.content.startsWith(prefix + "restart")) {
-        if(message.author.id !== "244888652004458497") return message.reply('You aren\'t the bot owner.');
+        if(message.author.id !== "486200045008453635") return message.reply('You aren\'t the bot owner.');
         message.channel.send('**Restarting.**').then(msg => {
             setTimeout(() => {
                msg.edit('**Restarting..**');
@@ -751,17 +703,6 @@ if (message.content.startsWith(prefix + 'trans')) {
 
 
 
-   client.on('message', message => {
-     if (message.content === "*support") {
-     let embed = new Discord.RichEmbed()
-  .setAuthor(message.author.username)
-  .setColor("#9B59B6")
-  .addField(" ** :scales:سيرفر الدعم:scales:  **" , "  **https://discord.gg/feMu8XW**")
-     
-     
-  message.channel.sendEmbed(embed);
-    }
-});
 
 
   
@@ -813,20 +754,6 @@ let PREFIX = '*'
   
 
 
-client.on('message', message => {
-  if (message.author.bot) return;
-  if (!message.content.startsWith(prefix)) return;
-
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-
-  let args = message.content.split(" ").slice(1);
-
-  if (command == "say") {
-   message.channel.sendMessage(args.join("  "))
-   message.delete()
-  }
- });
 
 
 
@@ -1255,7 +1182,7 @@ client.on('message' , message => {
         color: 0x06DF00,
         description: "تم مسح الرسائل ",
         footer: {
-          text: "~,.Bad"
+          text: "Viinz"
         }
       }}).then(msg => {msg.delete(3000)});
                           }
