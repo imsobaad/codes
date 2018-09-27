@@ -711,7 +711,7 @@ client.on('message', message => { //POWER
       .setThumbnail(message.guild.iconURL) //POWER
       .addField('• ID:', `- ${message.guild.id}`,true) //POWER
       .addField('• Owner:', `- ${message.guild.owner}`, true) //POWER
-      .addField('• Rooms:', `\`#\`- ${message.guild.channels.filter(a => a.type === 'text').size} - \`🎤\` ${message.guild.channels.filter(a => a.type === 'voice').size}`, true) //POWER
+      .addField('• Rooms:', `\`#\` ${message.guild.channels.filter(a => a.type === 'text').size} - \`🎤\` ${message.guild.channels.filter(a => a.type === 'voice').size}`, true) //POWER
       .addField('• Members:', `\`- Count\` ${message.guild.memberCount} - \`Last\` ${Array.from(message.channel.guild.members.values()).sort((a, b) => b.joinedAt - a.joinedAt).map(m => `${m}`).splice(0, 1)}`, true) //POWER
       .addField('• AFK Room:', `- ${message.guild.afkChannel || 'None'}`, true) //POWER
       .addField('• Others:', `\`- Roles\` ${message.guild.roles.size} - \`Emojis\` ${message.guild.emojis.size} `,true) //POWER
