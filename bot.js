@@ -703,21 +703,21 @@ client.on('message', message => {
 
 
 
-client.on('message',async king => { //POWER
+client.on('message', message => { //POWER
     if(king.content.startsWith(prefix + "server")) { //POWER
       let embed = new Discord.RichEmbed() //POWER
-      .setAuthor(king.author.username, king.author.avatarURL) //POWER
-      .setTitle(`\`${king.guild.name}\``) //POWER
-      .setThumbnail(king.guild.iconURL) //POWER
-      .addField('• ID:', `- ${king.guild.id}`,true) //POWER
-      .addField('• Owner:', `- ${king.guild.owner}`, true) //POWER
-      .addField('• Rooms:', `\`#\` ${king.guild.channels.filter(a => a.type === 'text').size} - \`🎤\` ${king.guild.channels.filter(a => a.type === 'voice').size}`, true) //POWER
-      .addField('• Members:', `\`Count\` ${king.guild.memberCount} - \`Last\` ${Array.from(king.channel.guild.members.values()).sort((a, b) => b.joinedAt - a.joinedAt).map(m => `${m}`).splice(0, 1)}`, true) //POWER
-      .addField('• AFK Room:', `${king.guild.afkChannel || 'None'}`, true) //POWER
-      .addField('• Others:', `\`Roles\` ${king.guild.roles.size} - \`Emojis\` ${king.guild.emojis.size} \`[\` ${king.guild.emojis.map(m => m).join(' **|** ')} \`]\``,true) //POWER
-      .addField('• Location:', `${king.guild.region}`, true); //POWER
+      .setAuthor(message.author.username, message.author.avatarURL) //POWER
+      .setTitle(`\`${message.guild.name}\``) //POWER
+      .setThumbnail(message.guild.iconURL) //POWER
+      .addField('• ID:', `- ${message.guild.id}`,true) //POWER
+      .addField('• Owner:', `- ${message.guild.owner}`, true) //POWER
+      .addField('• Rooms:', `\`#\` ${message.guild.channels.filter(a => a.type === 'text').size} - \`🎤\` ${message.guild.channels.filter(a => a.type === 'voice').size}`, true) //POWER
+      .addField('• Members:', `\`Count\` ${message.guild.memberCount} - \`Last\` ${Array.from(message.channel.guild.members.values()).sort((a, b) => b.joinedAt - a.joinedAt).map(m => `${m}`).splice(0, 1)}`, true) //POWER
+      .addField('• AFK Room:', `${message.guild.afkChannel || 'None'}`, true) //POWER
+      .addField('• Others:', `\`Roles\` ${message.guild.roles.size} - \`Emojis\` ${king.guild.emojis.size} \`[\` ${message.guild.emojis.map(m => m).join(' **|** ')} \`]\``,true) //POWER
+      .addField('• Location:', `${message.guild.region}`, true); //POWER
   
-      king.channel.send(embed); //POWER
+      message.channel.send(embed); //POWER
     }
   });
 
