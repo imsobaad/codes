@@ -704,7 +704,7 @@ client.on('message', message => {
 
 
 client.on('message', message => { //POWER
-    if(king.content.startsWith(prefix + "server")) { //POWER
+    if(message.content.startsWith(prefix + "server")) { //POWER
       let embed = new Discord.RichEmbed() //POWER
       .setAuthor(message.author.username, message.author.avatarURL) //POWER
       .setTitle(`\`${message.guild.name}\``) //POWER
