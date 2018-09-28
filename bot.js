@@ -851,7 +851,6 @@ client.on('message', message => {
     if (command == "embed") {
         if (!message.channel.guild) return message.reply('** This command only for servers **');
         let say = new Discord.RichEmbed()
-            .addField('Emebad:', `${message.author.username}#${message.author.discriminator}`)
             .setDescription(args.join("  "))
             .setColor(0x23b2d6)
         message.channel.sendEmbed(say);
