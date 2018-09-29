@@ -1035,7 +1035,7 @@ client.on('message',async message =>{
         .setDescription(message.guild.channels.map(c => `\`${i++}\` - **${c.name}**`))
         .setFooter(message.guild.channels.size + ' Channels in this server!');
         message.channel.send(embed)
-        });
+    
     }
 });
 
@@ -1052,7 +1052,7 @@ client.on('message',async message =>{
         .setDescription(message.guild.roles.map(r => `\`${i++}\` - **${r.name}**`))
         .setFooter(message.guild.roles.size + ' Roles in this server!');
         message.channel.send(embed)
-        });
+
     }
 });
 
