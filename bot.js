@@ -133,7 +133,7 @@ Server id: __${guild.id}__
 Server Count: __${guild.memberCount}__**`)
 });
 client.on('guildDelete', guild => {
-  client.channels.get("494975692937887774").send(`:negative_squared_cross_mark: **${client.user.tag} طلع من سيرفر
+  client.channels.get("495637507556376584").send(`:negative_squared_cross_mark: **${client.user.tag} طلع من سيرفر
 Server name: __${guild.name}__
 Server owner: __${guild.owner}__
 Server id: __${guild.id}__ 
