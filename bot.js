@@ -530,7 +530,7 @@ let embed = new Discord.RichEmbed()
      .setAuthor(message.author.username, message.author.avatarURL)
      .setDescription(':mailbox_with_mail: تم ارسال الرسالة الى صاحب البوت بنجاح')
      .setThumbnail(message.author.avatarURL)
-     .setFooter("By : ! ~ D e v i l")
+     .setFooter("By : Viinz")
                                                 
 
 message.channel.send(embed);
@@ -1026,21 +1026,35 @@ var prefix = "*";
 
 
 client.on('message',async message =>{
-    if(message.content.startsWith(prefix + "rooms")) {
+    if(message.content.startsWith(prefix + "channels")) {
         let i = 1;
         let embed = new Discord.RichEmbed()
         .setAuthor(message.author.username, message.author.avatarURL)
         .setTitle(message.guild.name)
         .setThumbnail(message.guild.iconURL)
         .setDescription(message.guild.channels.map(c => `\`${i++}\` - **${c.name}**`))
-        .setFooter(message.guild.channels.size + ' Channels in the server!');
-        message.channel.send(embed).then(msg => {
-            msg.delete(25000);
-            message.delete(25000);
+        .setFooter(message.guild.channels.size + ' Channels in this server!');
+        message.channel.send(embed)
         });
     }
 });
 
+
+
+
+client.on('message',async message =>{
+    if(message.content.startsWith(prefix + "roles")) {
+        let i = 1;
+        let embed = new Discord.RichEmbed()
+        .setAuthor(message.author.username, message.author.avatarURL)
+        .setTitle(message.guild.name)
+        .setThumbnail(message.guild.iconURL)
+        .setDescription(message.guild.roles.map(r => `\`${i++}\` - **${r.name}**`))
+        .setFooter(message.guild.roles.size + ' Roles in this server!');
+        message.channel.send(embed)
+        });
+    }
+});
 
 
 
