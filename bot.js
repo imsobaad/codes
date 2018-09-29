@@ -1193,28 +1193,49 @@ client.on('message' , message => {
    
 
 
-    client.on("message", message => {
-    var prefix = "*";
- 
-            var args = message.content.substring(prefix.length).split(" ");
-            if (message.content.startsWith(prefix + "clearall")) {
-   if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('⚠ | **لا يوجد لديك صلاحية لمسح الشات**');
-        var msg;
+
+client.on('message', message => {
+	var prefix = "-";
+   if(!message.channel.guild) return;
+if(message.content.startsWith(prefix + 'clearall')) {
+if(!message.channel.guild) return message.channel.send('**This Command is Just For Servers**').then(m => m.delete(5000));
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return      message.channel.send('**You Do not have permission** `MANAGE_MESSAGES`' );
+let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
+let request = `Requested By ${message.author.username}`;
+message.channel.send(`**Are You sure you want to clear the chat?**`).then(msg => {
+msg.react('✅')
+.then(() => msg.react('❌'))
+.then(() =>msg.react('✅'))
+
+let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
+
+let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
+let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+reaction1.on("collect", r => {
+message.channel.send(`Chat will delete`).then(m => m.delete(5000));
+var msg;
         msg = parseInt();
-      
+
       message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
       message.channel.sendMessage("", {embed: {
-        title: "Done | تــم مسح الشات",
+        title: "`` Chat Deleted ``",
         color: 0x06DF00,
-        description: "تم مسح الرسائل ",
         footer: {
-          text: "Viinz"
+
         }
       }}).then(msg => {msg.delete(3000)});
-                          }
 
-     
-});  
+})
+reaction2.on("collect", r => {
+message.channel.send(`**Chat deletion cancelled**`).then(m => m.delete(5000));
+msg.delete();
+})
+})
+}
+});
+
+
 
 
 
@@ -2334,67 +2355,48 @@ client.on('message',  (message) => {
 
 	
 	
-client.on('message' , async (message) => {
-       if(message.content.startsWith(prefix + "rps")) {
-              let args = message.content.split(" ").slice(1);
-  var choice = args[0];
-  if (choice == "ورقة" || choice == "p") {
-    var numb = Math.floor(Math.random() * 100);
-    if (numb <= 50) {
-      var choice2 = "ورقة";
-    } else if (numb > 50) {
-      var choice2 = "حجر";
-    } else {
-      var choice2 = "مقص";
-    }
-    if (choice2 == "مقص") {
-      var response = " لقد اخترت **مقص** و :v: ولقد فزت"
-    } else if (choice2 == "ورقة") {
-      var response = " لقد اخترت **ورقه** :hand_splayed: انه تعادل "
-    } else {
-      var response = " لقد اخترت **حجر** :punch:  انت الفائز"    
-    }
-    message.channel.send(response);
-  } else if (choice == "حجر" || choice == "r") {
-    var numb = Math.floor(Math.random() * 100);
-    if (numb <= 50) {
-      var choice2 = "ورقة";
-    } else if (numb > 50) {
-      var choice2 = "حجر";
-    } else {
-      var choice2 = "مقص";
-    }
-    if (choice2 == "ورقة") {
-      var response = " لقد اخترت **ورقه** :hand_splayed: ولقد فزت"
-    } else if (choice2 == "حجر") {
-      var response = "لقد اخترت **حجر** :punch: انه تعادل "
-    } else {
-      var response = " لقد اخترت **مقص** :v: انت الفائز"
-    }
-    message.channel.send(response);
-  } else if (choice == "مقص" || choice == "s") {
-    var numb = Math.floor(Math.random() * 100);
-    if (numb <= 50) {
-      var choice2 = "ورقة";
-    } else if (numb > 50) {
-      var choice2 = "حجر";
-    } else {
-      var choice2 = "مقص";
-    }
-    if (choice2 == "حجر") {
-      var response = "لقد اخترت **ورقه** :hand_splayed: لقد فزت"
-    } else if (choice2 == "مقص") {
-      var response = "لقد اخترت **مقص** :v: انه تعادل"
-    } else {
-      var response = " لقد اخترت **حجر** :punch: انت الفائز "
-    }
-    message.channel.send(response);
-  } else {
-    message.channel.send(`يجب عليك استعمال \`${prefix}rps\` <حجر|ورقة|مقص>`);
-  }
-}
+client.on("message", function(message) {
+	var prefix = "-";
+   if(message.content.startsWith(prefix + "rps")) {
+    let messageArgs = message.content.split(" ").slice(1).join(" ");
+    let messageRPS = message.content.split(" ").slice(2).join(" ");
+    let arrayRPS = ['**# - Rock**','**# - Paper**','**# - Scissors**'];
+    let result = `${arrayRPS[Math.floor(Math.random() * arrayRPS.length)]}`;
+    var RpsEmbed = new Discord.RichEmbed()
+    .setAuthor(message.author.username)
+    .setThumbnail(message.author.avatarURL)
+    .addField("Rock","🇷",true)
+    .addField("Paper","🇵",true)
+    .addField("Scissors","🇸",true)
+    message.channel.send(RpsEmbed).then(msg => {
+        msg.react(' 🇷')
+        msg.react("🇸")
+        msg.react("🇵")
+.then(() => msg.react('🇷'))
+.then(() =>msg.react('🇸'))
+.then(() => msg.react('🇵'))
+let reaction1Filter = (reaction, user) => reaction.emoji.name === '🇷' && user.id === message.author.id;
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '🇸' && user.id === message.author.id;
+let reaction3Filter = (reaction, user) => reaction.emoji.name === '🇵' && user.id === message.author.id;
+let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
+	    
+let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+let reaction3 = msg.createReactionCollector(reaction3Filter, { time: 12000 });
+reaction1.on("collect", r => {
+        message.channel.send(result)
+})
+reaction2.on("collect", r => {
+        message.channel.send(result)
+})
+reaction3.on("collect", r => {
+        message.channel.send(result)
+})
 
+    })
+}
 });
+
+
 	
 	
 	var Himo_04 = ["https://f.top4top.net/p_682it2tg6.png","https://e.top4top.net/p_682a1cus5.png","https://d.top4top.net/p_682pycol4.png","https://c.top4top.net/p_682vqehy3.png","https://b.top4top.net/p_682mlf9d2.png","https://a.top4top.net/p_6827dule1.png","https://b.top4top.net/p_682g1meb10.png","https://a.top4top.net/p_682jgp4v9.png","https://f.top4top.net/p_682d4joq8.png","https://e.top4top.net/p_6828o0e47.png","https://d.top4top.net/p_6824x7sy6.png","https://c.top4top.net/p_682gzo2l5.png","https://b.top4top.net/p_68295qg04.png","https://a.top4top.net/p_682zrz6h3.png","https://f.top4top.net/p_6828vkzc2.png","https://e.top4top.net/p_682i8tb11.png","https://f.top4top.net/p_8816hvic1.png","https://d.top4top.net/p_882020461.png","https://e.top4top.net/p_882s3ftn1.png","https://a.top4top.net/p_882eg9c51.png","https://c.top4top.net/p_882xkcqd1.png","https://f.top4top.net/p_882w7pdi1.png","https://a.top4top.net/p_882gcpmo1.png"]
