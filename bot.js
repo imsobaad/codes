@@ -78,7 +78,7 @@ client.on('guildMemberAdd', member => {
     const inviter = client.users.get(invite.inviter.id);
     const yumz = member.guild.channels.find("name", "welcome");
      yumz.send(`**Welcome <@${member.user.id}> To Our Server
-Invited By** <@${inviter.id}>`);
+Invited By** <@${invite.inviter}>`);
    //  yumz.send(`<@${member.user.id}> joined using invite code ${invite.code} from <@${inviter.id}>. Invite was used ${invite.uses} times since its creation.`);
   }); 
 });
