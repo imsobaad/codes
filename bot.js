@@ -699,10 +699,10 @@ let PREFIX = '*'
       .addField('Heap :: ${Math.round(process.memoryUsage().heapTotal / 1024 / 1024 * 100) / 100} MB')
       .addField('Ram :: ${ramUsage} MB')
       .addField('Rss :: ${Math.round(process.memoryUsage().rss / 1024 / 1024 * 100) / 100} MB')
-	 }
-  })
-});
 
+    })
+}
+});
 
 
    
