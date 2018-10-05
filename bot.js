@@ -678,7 +678,7 @@ let PREFIX = '*'
     let upTime = timeCon(process.uptime());
     let createdAt = moment(message.user.createdAt).fromNow();
 
-	  let embed = new Discord.RichEmbed()
+	  const embed = new Discord.RichEmbed()
 	   .setColor("RANDOM")
       .setAuthor(message.author.username, message.author.avatarURL) //POWER
       .addField('= Normal Information =')
