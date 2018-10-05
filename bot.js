@@ -658,33 +658,27 @@ let PREFIX = '*'
 
 
 
-  function timeCon(time) {
-  let days = Math.floor(time % 31536000 / 86400);
-  let hours = Math.floor(time % 31536000 % 86400 / 3600);
-  let minutes = Math.floor(time % 31536000 % 86400 % 3600 / 60);
-  let seconds = Math.round(time % 31536000 % 86400 % 3600 % 60);
-  days = days > 9 ? days : '0' + days;
-  hours = hours > 9 ? hours : '0' + hours;
-  minutes = minutes > 9 ? minutes : '0' + minutes;
-  seconds = seconds > 9 ? seconds : '0' + seconds;
-  return `${days > 0 ? `${days} Days ` : ''}${(hours || days) > 0 ? `${hours} Hours ` : ''}${minutes} Mins ${seconds} Secs`;
-  }
+function timeCon(time) {
+    let days = Math.floor(time % 31536000 / 86400)
+    let hours = Math.floor(time % 31536000 % 86400 / 3600)
+    let minutes = Math.floor(time % 31536000 % 86400 % 3600 / 60)
+    let seconds = Math.round(time % 31536000 % 86400 % 3600 % 60)
+    days = days > 9 ? days : '0' + days
+    hours = hours > 9 ? hours : '0' + hours
+    minutes = minutes > 9 ? minutes : '0' + minutes
+    seconds = seconds > 9 ? seconds : '0' + seconds
+    return `${days > 0 ? `${days}:` : ''}${(hours || days) > 0 ? `${hours}:` : ''}${minutes}:${seconds}`
+}
   client.on('message',async message => {
-  if(message.author.bot) return;
-  if(message.channel.type === 'dm') return;
-  if(message.content.startsWith(prefix + "bot")) {
-    let ramUsage = (process.memoryUsage().rss / 1048576).toFixed();
-    let upTime = timeCon(process.uptime());
-    let createdAt = moment(message.user.createdAt).fromNow();
-   
+  if(message.content.startsWith(prefix + "bot")) {   
 	 message.channel.send({
 	   embed: new Discord.RichEmbed()
 	   .setColor("RANDOM")
       .setAuthor(message.author.username, message.author.avatarURL) 
       .addField('= Normal Information =')
-      .addField('Creator :: ${message.users.get("486200045008453635").username} - ${createdAt}')
+      .addField('Creator :: ${message.users.get("486200045008453635").username} - ${moment(message.user.createdAt).fromNow()}')
       .addField('Ping :: ${message.pings[0]} ms')
-      .addField('UpTime :: ${upTime}')
+      .addField('UpTime :: [timeCon(process.uptime())]')
       .addField('= Servers Information =')
       .addField('Servers :: ${message.guilds.size}')
       .addField('Users :: ${message.users.size}')
@@ -697,7 +691,7 @@ let PREFIX = '*'
       .addField('= Host Information =')
       .addField('UsedHeap :: ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100} MB')
       .addField('Heap :: ${Math.round(process.memoryUsage().heapTotal / 1024 / 1024 * 100) / 100} MB')
-      .addField('Ram :: ${ramUsage} MB')
+      .addField('Ram :: [${(process.memoryUsage().rss / 1048576).toFixed()} MB')
       .addField('Rss :: ${Math.round(process.memoryUsage().rss / 1024 / 1024 * 100) / 100} MB')
 
     })
