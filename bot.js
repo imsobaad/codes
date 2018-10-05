@@ -658,23 +658,54 @@ let PREFIX = '*'
 
 
 
-client.on('message',function(message) {
-   if(message.content.startsWith(prefix + "guilds")) {
-       message.channel.send(`Guilds: \`\`${client.guilds.size}\`\``);
-   } 
+  client.on('message',async message => {
+  function timeCon(time) {
+  let days = Math.floor(time % 31536000 / 86400);
+  let hours = Math.floor(time % 31536000 % 86400 / 3600);
+  let minutes = Math.floor(time % 31536000 % 86400 % 3600 / 60);
+  let seconds = Math.round(time % 31536000 % 86400 % 3600 % 60);
+  days = days > 9 ? days : '0' + days;
+  hours = hours > 9 ? hours : '0' + hours;
+  minutes = minutes > 9 ? minutes : '0' + minutes;
+  seconds = seconds > 9 ? seconds : '0' + seconds;
+  return `${days > 0 ? `${days} Days ` : ''}${(hours || days) > 0 ? `${hours} Hours ` : ''}${minutes} Mins ${seconds} Secs`;
+  }
+  
+  if(message.author.bot) return;
+  if(message.channel.type === 'dm') return;
+  if(message.content.startsWith(prefix + "bot")) {
+    let ramUsage = (process.memoryUsage().rss / 1048576).toFixed();
+    let upTime = timeCon(process.uptime());
+    let createdAt = moment(message.user.createdAt).fromNow();
+
+	  let embed = new Discord.RichEmbed()
+	   .setColor("RANDOM")
+      .setAuthor(message.author.username, message.author.avatarURL) //POWER
+      .addField('= Normal Information =')
+      .addField('Creator :: ${message.users.get("486200045008453635").username} - ${createdAt}')
+      .addField('Ping :: ${message.pings[0]} ms')
+      .addField('UpTime :: ${upTime}')
+
+      .addField('= Servers Information =')
+      .addField('Servers :: ${message.guilds.size}')
+      .addField('Users :: ${message.users.size}')
+      .addField('Channels :: ${message.channels.size}')
+
+      .addField('= Developer Information =')
+      .addField('NodeJS :: ${process.version}')
+      .addField('DiscordJS :: ${Discord.version}')
+      .addField('Arch :: ${process.arch}')
+      .addField('Platform :: ${process.platform}')
+
+      .addField('= Host Information =')
+      .addField('UsedHeap :: ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100} MB')
+      .addField('Heap :: ${Math.round(process.memoryUsage().heapTotal / 1024 / 1024 * 100) / 100} MB')
+      .addField('Ram :: ${ramUsage} MB')
+      .addField('Rss :: ${Math.round(process.memoryUsage().rss / 1024 / 1024 * 100) / 100} MB')
+
+  }
 });
-//========================================================
-client.on('message',function(message) {
-   if(message.content.startsWith(prefix + "users")) {
-       message.channel.send(`Users: \`\`${client.users.size}\`\``);
-   } 
-});
-//=========================================================
-client.on('message',function(message) {
-   if(message.content.startsWith(prefix + "channels")) {
-       message.channel.send(`channels: \`\`${client.channels.size}\`\``);
-   } 
-});
+
 
 
    
