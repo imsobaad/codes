@@ -71,10 +71,10 @@ client.on('message', message => {
             .setAuthor(message.author.username,message.author.avatarURL)
 	    .setThumbnail(client.user.avatarURL)
             .setColor('RANDOM')
-            .setTitle('``King Bot`` ')
-            .addField('• Ping' , [ [`${Date.now() - message.createdTimestamp}` + 'MS'] ], true)
+            .setTitle('__**King Bot**__ ')
+            .addField('• Ping' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
             .addField('• RamUsage', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
-            .addField('• Servers Count', [ [client.guilds.size] ], true)
+            .addField('• Servers Count', [client.guilds.size], true)
             .addField('• Channels Count' , `[ ${client.channels.size} ]` , true)
             .addField('• Users Count' ,`[ ${client.users.size} ]` , true)
             .addField('• ID' , `[ ${client.user.id} ]` , true)
@@ -86,23 +86,7 @@ client.on('message', message => {
 
 
 
-client.on('message', message => { //POWER
-    if(message.content.startsWith(prefix + "server")) { //POWER
-      let embed = new Discord.RichEmbed() //POWER
-      .setAuthor(message.author.username, message.author.avatarURL) //POWER
-      .setTitle(`\`${message.guild.name}\``) //POWER
-      .setThumbnail(message.guild.iconURL) //POWER
-      .addField('• ID:', `- ${message.guild.id}`,true) //POWER
-      .addField('• Owner:', `- ${message.guild.owner}`, true) //POWER
-      .addField('• Rooms:', `\`#\` ${message.guild.channels.filter(a => a.type === 'text').size} - \`🎤\` ${message.guild.channels.filter(a => a.type === 'voice').size}`, true) //POWER
-      .addField('• Members:', `\`- Count\` ${message.guild.memberCount} - \`Last\` ${Array.from(message.channel.guild.members.values()).sort((a, b) => b.joinedAt - a.joinedAt).map(m => `${m}`).splice(0, 1)}`, true) //POWER
-      .addField('• AFK Room:', `- ${message.guild.afkChannel || 'None'}`, true) //POWER
-      .addField('• Others:', `\`- Roles\` ${message.guild.roles.size} - \`Emojis\` ${message.guild.emojis.size} `,true) //POWER
-      .addField('• Location:', `- ${message.guild.region}`, true); //POWER
-  
-      message.channel.send(embed); //POWER
-    }
-  });
+
 
 
 
@@ -290,6 +274,23 @@ let welcomer = member.guild.channels.find("name","welcome");
 
 
   
+client.on('message', message => { //POWER
+    if(message.content.startsWith(prefix + "server")) { //POWER
+      let embed = new Discord.RichEmbed() //POWER
+      .setAuthor(message.author.username, message.author.avatarURL) //POWER
+      .setTitle(`\`${message.guild.name}\``) //POWER
+      .setThumbnail(message.guild.iconURL) //POWER
+      .addField('• ID:', `- ${message.guild.id}`,true) //POWER
+      .addField('• Owner:', `- ${message.guild.owner}`, true) //POWER
+      .addField('• Rooms:', `\`#\` ${message.guild.channels.filter(a => a.type === 'text').size} - \`🎤\` ${message.guild.channels.filter(a => a.type === 'voice').size}`, true) //POWER
+      .addField('• Members:', `\`- Count\` ${message.guild.memberCount} - \`Last\` ${Array.from(message.channel.guild.members.values()).sort((a, b) => b.joinedAt - a.joinedAt).map(m => `${m}`).splice(0, 1)}`, true) //POWER
+      .addField('• AFK Room:', `- ${message.guild.afkChannel || 'None'}`, true) //POWER
+      .addField('• Others:', `\`- Roles\` ${message.guild.roles.size} - \`Emojis\` ${message.guild.emojis.size} `,true) //POWER
+      .addField('• Location:', `- ${message.guild.region}`, true); //POWER
+  
+      message.channel.send(embed); //POWER
+    }
+  });
 
 
    
