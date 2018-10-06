@@ -61,25 +61,6 @@ client.user.setGame(`Use *help`,"http://twitch.tv/S-F")
 
 
 
-client.on('message',function(message) {
-   if(message.content.startsWith(prefix + "guilds")) {
-       message.channel.send(`Guilds: \`\`${client.guilds.size}\`\``);
-   } 
-});
-//========================================================
-client.on('message',function(message) {
-   if(message.content.startsWith(prefix + "users")) {
-       message.channel.send(`Users: \`\`${client.users.size}\`\``);
-   } 
-});
-//=========================================================
-client.on('message',function(message) {
-   if(message.content.startsWith(prefix + "channels")) {
-       message.channel.send(`channels: \`\`${client.channels.size}\`\``);
-   } 
-});
-
-
 
 
 
@@ -88,6 +69,7 @@ client.on('message', message => {
     message.channel.send({
         embed: new Discord.RichEmbed()
             .setAuthor(message.author.username,message.author.avatarURL)
+	    .setThumbnail(client.user.avatarURL)
             .setColor('RANDOM')
             .setTitle('``King Bot`` ')
             .addField('• Ping' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
