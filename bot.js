@@ -87,7 +87,7 @@ client.on('message', message => {
     if (message.content.startsWith("*bot")) {
     message.channel.send({
         embed: new Discord.RichEmbed()
-            .setAuthor(message.user.username,message.user.avatarURL)
+            .setAuthor(message.author.username,message.author.avatarURL)
             .setColor('RANDOM')
             .setTitle('``King Bot`` ')
             .addField('• Ping' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
