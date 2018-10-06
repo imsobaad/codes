@@ -83,6 +83,49 @@ client.on('message',function(message) {
 
 
 
+client.on('message', message => {
+    if (message.content.startsWith("*bot")) {
+    message.channel.send({
+        embed: new Discord.RichEmbed()
+            .setAuthor(message.user.username,message.user.avatarURL)
+            .setColor('RANDOM')
+            .setTitle('``King Bot`` ')
+            .addField('• Ping' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
+            .addField('• RamUsage', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
+            .addField('• Servers Count', [client.guilds.size], true)
+            .addField('• Channels Count' , `[ ${client.channels.size} ]` , true)
+            .addField('• Users Count' ,`[ ${client.users.size} ]` , true)
+            .addField('• ID' , `[ ${client.user.id} ]` , true)
+                  .setFooter('Requested By : '+message.author.username,message.author.avatarURL)
+    })
+}
+});
+
+
+
+
+client.on('message', message => { //POWER
+    if(message.content.startsWith(prefix + "server")) { //POWER
+      let embed = new Discord.RichEmbed() //POWER
+      .setAuthor(message.author.username, message.author.avatarURL) //POWER
+      .setTitle(`\`${message.guild.name}\``) //POWER
+      .setThumbnail(message.guild.iconURL) //POWER
+      .addField('• ID:', `- ${message.guild.id}`,true) //POWER
+      .addField('• Owner:', `- ${message.guild.owner}`, true) //POWER
+      .addField('• Rooms:', `\`#\` ${message.guild.channels.filter(a => a.type === 'text').size} - \`🎤\` ${message.guild.channels.filter(a => a.type === 'voice').size}`, true) //POWER
+      .addField('• Members:', `\`- Count\` ${message.guild.memberCount} - \`Last\` ${Array.from(message.channel.guild.members.values()).sort((a, b) => b.joinedAt - a.joinedAt).map(m => `${m}`).splice(0, 1)}`, true) //POWER
+      .addField('• AFK Room:', `- ${message.guild.afkChannel || 'None'}`, true) //POWER
+      .addField('• Others:', `\`- Roles\` ${message.guild.roles.size} - \`Emojis\` ${message.guild.emojis.size} `,true) //POWER
+      .addField('• Location:', `- ${message.guild.region}`, true); //POWER
+  
+      message.channel.send(embed); //POWER
+    }
+  });
+
+
+
+
+
 
 const invites = {};
 const wait = require('util').promisify(setTimeout);
@@ -111,20 +154,6 @@ Invited By** ${invite.inviter}`);
 
 
 
-  client.on('guildCreate', guild => {
-client.channels.get("494975692937887774").send(`:white_check_mark: **${client.user.tag} دخل سيرفر جديد
-Server name: __${guild.name}__
-Server owner: __${guild.owner}__
-Server id: __${guild.id}__ 
-Server Count: __${guild.memberCount}__**`)
-});
-client.on('guildDelete', guild => {
-  client.channels.get("495637507556376584").send(`:negative_squared_cross_mark: **${client.user.tag} طلع من سيرفر
-Server name: __${guild.name}__
-Server owner: __${guild.owner}__
-Server id: __${guild.id}__ 
-Server Count: __${guild.memberCount}__**`)
-});
 
 
 
@@ -624,23 +653,6 @@ client.on('message', message => {
 
 
 
-client.on('message', message => { //POWER
-    if(message.content.startsWith(prefix + "server")) { //POWER
-      let embed = new Discord.RichEmbed() //POWER
-      .setAuthor(message.author.username, message.author.avatarURL) //POWER
-      .setTitle(`\`${message.guild.name}\``) //POWER
-      .setThumbnail(message.guild.iconURL) //POWER
-      .addField('• ID:', `- ${message.guild.id}`,true) //POWER
-      .addField('• Owner:', `- ${message.guild.owner}`, true) //POWER
-      .addField('• Rooms:', `\`#\` ${message.guild.channels.filter(a => a.type === 'text').size} - \`🎤\` ${message.guild.channels.filter(a => a.type === 'voice').size}`, true) //POWER
-      .addField('• Members:', `\`- Count\` ${message.guild.memberCount} - \`Last\` ${Array.from(message.channel.guild.members.values()).sort((a, b) => b.joinedAt - a.joinedAt).map(m => `${m}`).splice(0, 1)}`, true) //POWER
-      .addField('• AFK Room:', `- ${message.guild.afkChannel || 'None'}`, true) //POWER
-      .addField('• Others:', `\`- Roles\` ${message.guild.roles.size} - \`Emojis\` ${message.guild.emojis.size} `,true) //POWER
-      .addField('• Location:', `- ${message.guild.region}`, true); //POWER
-  
-      message.channel.send(embed); //POWER
-    }
-  });
 
 
 
@@ -2325,54 +2337,6 @@ client.on('message', message => {
 
 
 
-
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-         client.on('message', message => {
-            if (message.content === 'السلام عليكم') {
-              message.channel.send(' وِ عَ ـلَيّكمِ آلَسًسًـلَآمِ وِ رحً ـمِة آلَلَهِ تُعَ ـآلَى وِ بّـركآتُهِ:heart: ');
-               
-
-            }
-}); 
-
-
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-         client.on('message', message => {
-            if (message.content === 'هلا') {
-              message.channel.send(' هِلَآ بّـيّك:heart: ');
-               
-
-            }
-}); 
-
-
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-         client.on('message', message => {
-            if (message.content === 'برب') {
-              message.channel.send(' تُيّتُ:heart: ');
-               
-
-            }
-}); 
-
-
-
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-         client.on('message', message => {
-            if (message.content === 'باك') {
-              message.channel.send(' وِلَكمِ بّـآك مِنٌوِر يّآ عَ ـسًسًـلَ:heart: ');
-               
-
-            }
-}); 
 
 
 
