@@ -1114,20 +1114,28 @@ client.on('message', msg => {
 });
    
 
-  client.on('message', message => {
-   if(message.author.bot || message.channel.type === 'dm') return;
-  let args = message.content.split(' ');
-  if(args[0] === `*bc`) {
+client.on('message', message => {
+              if(!message.channel.guild) return;
+    if(message.content.startsWith('*bc')) {
+    if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
   if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
-    if (!args[1]) return message.channel.send('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');
+    let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
+    let copy = "King Bot";
+    let request = `Requested By ${message.author.username}`;
+    if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(`**هل أنت متأكد من إرسالك البرودكاست؟ \nمحتوى البرودكاست:** \` ${args}\``).then(msg => {
+    msg.react('✅')
+    .then(() => msg.react('❌'))
+    .then(() =>msg.react('✅'))
 
-    let copy = 'King Bot'
-    let msgCount = 0;
-    let errorCount = 0;
-    let successCount = 0;
-    message.channel.send(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`).then(msg => {
-      message.guild.members.forEach(g => {
-      var bc = new Discord.RichEmbed()
+    let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+    let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
+       let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
+    let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+    reaction1.on("collect", r => {
+    message.channel.send(`☑ |   ${message.guild.members.size} يتم ارسال البرودكاست الى عضو `).then(m => m.delete(5000));
+    message.guild.members.forEach(m => {
+    var bc = new
+       Discord.RichEmbed()
        .setColor('RANDOM')
        .setTitle('__**📢Broadcast📢**__') 
        .addField('**🔸Server**', message.guild.name)
@@ -1135,19 +1143,17 @@ client.on('message', msg => {
        .addField('**📖Message**', args)
        .setTimestamp() 
        .setFooter(copy, client.user.avatarURL);
-    g.sendMessage({ embed: bc }).then(() => {
-          successCount++;
-          msgCount++;
-          msg.edit(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`);
-        }).catch(e => {
-          errorCount++;
-          msgCount++;
-          msg.edit(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`);
+    m.send({ embed: bc })
+    msg.delete();
+    })
+    })
+    reaction2.on("collect", r => {
+    message.channel.send(`**Broadcast Canceled.**`).then(m => m.delete(5000));
+    msg.delete();
     })
     })
     }
-    });
-
+    })
 
 
 	
