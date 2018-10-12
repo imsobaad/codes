@@ -1150,7 +1150,7 @@ client.on('message', msg => {
     })
     })
     })
-    }
+});
 
 
 	
