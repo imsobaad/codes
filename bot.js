@@ -170,121 +170,58 @@ message.channel.send(`${user}'s Avatar link : ${user.avatarURL}`);
 
 
 
-client.on('message', async message => {
-  let args = message.content.split(" ");
-  if(message.content.startsWith(prefix + "mute")) {
-    if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send('').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
-    });
- 
-    if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.channel.send('').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
-    });
- 
-    let mention = message.mentions.members.first();//kinggamer حقوق الفا كودز و
-    if(!mention) return  message.channel.send('').then(msg => { //kinggamer حقوق الفا كودز و
-      msg.delete(3500);
-      message.delete(3500);
-    });
- 
-    if(mention.id === message.author.id) return message.channel.send('**لا تستطيع اعطاء ميوت لنفسك:x:**').then(msg => {
-      msg.delete(3500);
-      message.delete(3500); //kinggamer حقوق الفا كودز و
-    });
-   
-    if(mention.hasPermission('ADMINISTRATOR')) return message.channel.send(`**:x: لا يمكن اعطاء ميوت لادارة السيرفر**`); //kinggamer حقوق الفا كودز و
- 
-    if(message.guild.member(mention).roles.find('name', 'Muted')) return message.channel.send(`**:information_source: ${mention.user.username} هذا الشخص معاقب بالفعل**`);
- 
-   
-    if(mention.position >= message.guild.member(message.author).positon) return message.channel.send('**لا تملك خاصية التعديل على الرولات:x:**').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
-    });
-   
-    if(mention.positon >= message.guild.member(client.user).positon) return message.channel.send('**لا املك خاصية التعديل على الرولات:x:**').then(msg => {
-      msg.delete(3500);
-      message.delete(3500); //kinggamer حقوق الفا كودز و
-    });
-   
-    let duration = args[2];
-    if(!duration) message.channel.send(`***mute @user time reason جرب:hash:**`).then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
-    });
- 
-    if(isNaN(duration))  message.channel.send('').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
-    });
- 
-    let reason = message.content.split(" ").slice(3).join(" ");
-    if(!reason) reason = " [ **لم يتم ذكر السبب** ] ";
- 
-    let thisEmbed = new Discord.RichEmbed()
-    .setAuthor(mention.user.username, mention.user.avatarURL)
-    .setTitle('**تم اعطائك ميوت**')
-    .addField('**__السيرفر__**',[ message.guild.name ]) //kinggamer حقوق الفا كودز و
-    .addField('**__بواسطة__**', [ message.author ])
-    .addField('**__السبب__**',reason)
-    .addField('**__وقت الميوت__**',duration)
- 
-    let role = message.guild.roles.find('name', 'Muted') || message.guild.roles.get(r => r.name === 'Muted');
-    if(!role) try {
-      message.guild.createRole({
-        name: "Muted",
-        permissions: 0 //kinggamer حقوق الفا كودز و
-      }).then(r => {
-        message.guild.channels.forEach(c => {
-          c.overwritePermissions(r , {
-            SEND_MESSAGES: false, //kinggamer حقوق الفا كودز و
-            READ_MESSAGES_HISTORY: false,
-            ADD_REACTIONS: false
+  client.on('message', async message =>{
+const ms = require("ms");
+if (message.author.omar) return;
+if (!message.content.startsWith(prefix + 'mute')) return;
+if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) 
+	return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
+if (!message.guild.member(message.author).hasPermission('MANAGE_ROLES')) 
+        return message.reply(':lock: **You** need `MANAGE_ROLES` Permissions ').then(msg => msg.delete(6000))
+
+var command = message.content.split(" ")[0];
+command = command.slice(prefix.length);
+var args = message.content.split(" ").slice(1);
+    if(command == "mute") {
+    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!tomute) return message.reply("**يجب عليك المنشن اولاّ**:x: ") .then(m => m.delete(5000));
+    if(tomute.hasPermission("MANAGE_MESSAGES"))return      message.channel.send('**للأسف لا أمتلك صلاحية** `MANAGE_MASSAGEES`');
+    let muterole = message.guild.roles.find(`name`, "Muted");
+    //start of create role
+    if(!muterole){
+      try{
+        muterole = await message.guild.createRole({
+          name: "Muted",
+          color: "#070000",
+          permissions:[]
+        })
+        message.guild.channels.forEach(async (channel, id) => {
+          await channel.overwritePermissions(muterole, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false,
+            SPEAK : false
           });
         });
-      }); //kinggamer حقوق الفا كودز و
-    } catch(e) {
-      console.log(e.stack);
+      }catch(e){
+        console.log(e.stack);
+      }
     }
-    mention.addRole(role).then(() => {
-      mention.send(thisEmbed);
-      message.channel.send(`**:white_check_mark: ${mention.user.username}  Muted! :zipper_mouth:  **  `);
-      mention.setMute(true); //kinggamer حقوق الفا كودز و
-    });
-    setTimeout(function(){
+    //end of create role
+    let mutetime = args[1];
+    if(!mutetime) return message.reply("**يرجى تحديد وقت الميوت**:x:");
+
+    await(tomute.addRole(muterole.id));
+message.reply(`<@${tomute.id}> ${ms(ms(mutetime))} : **تم اعطائه ميوت ومدة الميوت**`);
+setTimeout(function(){
       tomute.removeRole(muterole.id);
       message.channel.send(`<@${tomute.id}> **انقضى الوقت وتم فك الميوت عن الشخص**:white_check_mark: `);
     }, ms(mutetime));
-  }
-});
-client.on('message', async message => {
-    let mention = message.mentions.members.first();
-let command = message.content.split(" ")[0];
-     command = command.slice(prefix.length);
-    let args = message.content.split(" ").slice(1);  //kinggamer حقوق الفا كودز و
-if(command === `unmute`) {2
-  if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.sendMessage("**لا تملك خاصية التعديل على الرولات:x:**").then(m => m.delete(5000));
-if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**لا املك خاصية التعديل على الرولات:x:**").then(msg => msg.delete(6000))
  
-  let kinggamer = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-     if(!kinggamer) return message.channel.send('').then(msg => {
-      msg.delete(3500);
-      message.delete(3500); //kinggamer حقوق الفا كودز و
-    });
  
-  let role = message.guild.roles.find (r => r.name === "Muted");
- 
-  if(!role || !kinggamer.roles.has(role.id)) return message.channel.sendMessage(`**:information_source:${mention.user.username} لقد تم فك الميوت عنه مسبقا**`)
- 
-  await kinggamer.removeRole(role) //kinggamer حقوق الفا كودز و
-  message.channel.sendMessage(`**:white_check_mark: ${mention.user.username}  Unmuted! **`);
- 
-  return;
  
   }
- 
+
 });
 
 
