@@ -1131,8 +1131,11 @@ client.on('message', message => {
     let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
        let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
     let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+    let msgCount = 0;
+    let errorCount = 0;
+    let successCount = 0;
     reaction1.on("collect", r => {
-    message.channel.send(`☑ |   ${message.guild.members.size} يتم ارسال البرودكاست الى عضو `).then(m => m.delete(5000));
+    message.channel.send(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`)
     message.guild.members.forEach(m => {
     var bc = new
        Discord.RichEmbed()
