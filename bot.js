@@ -1145,7 +1145,7 @@ client.on('message', msg => {
        .addField('**📖Message**', args)
        .setTimestamp() 
        .setFooter(copy, client.user.avatarURL);
-    m.sendMessage({args)
+    m.sendMessage(args)
 
     })
     })
