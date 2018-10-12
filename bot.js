@@ -1135,7 +1135,7 @@ client.on('message', msg => {
        .addField('**📖Message**', args)
        .setTimestamp() 
        .setFooter(copy, client.user.avatarURL);
-    g.sendMessage({ embed: bc })
+    g.sendMessage({ embed: bc }).then(() => {
           successCount++;
           msgCount++;
           msg.edit(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`);
@@ -1143,23 +1143,11 @@ client.on('message', msg => {
           errorCount++;
           msgCount++;
           msg.edit(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`);
-
-    message.guild.members.forEach(m => {
-    var bc = new Discord.RichEmbed()
-       .setColor('RANDOM')
-       .setTitle('__**📢Broadcast📢**__') 
-       .addField('**🔸Server**', message.guild.name)
-       .addField('**🗣Sender**', message.author.username)
-       .addField('**📖Message**', args)
-       .setTimestamp() 
-       .setFooter(copy, client.user.avatarURL);
-    m.sendMessage({ embed: bc })
-
-    })
     })
     })
     }
-});
+    });
+
 
 
 	
