@@ -253,11 +253,10 @@ client.on('message', async message => {
       message.channel.send(`**:white_check_mark: ${mention.user.username}  Muted! :zipper_mouth:  **  `);
       mention.setMute(true); //kinggamer حقوق الفا كودز و
     });
-    setTimeout(() => {
-      if(duration === 0) return;
-      mention.setMute(false);
-      mention.removeRole(role)
-    },duration * 60000); //kinggamer حقوق الفا كودز و
+    setTimeout(function(){
+      tomute.removeRole(muterole.id);
+      message.channel.send(`<@${tomute.id}> **انقضى الوقت وتم فك الميوت عن الشخص**:white_check_mark: `);
+    }, ms(mutetime));
   }
 });
 client.on('message', async message => {
