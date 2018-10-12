@@ -1114,7 +1114,7 @@ client.on('message', msg => {
 });
    
 
-client.on('message', message => {
+  client.on('message', message => {
               if(!message.channel.guild) return;
     if(message.content.startsWith('*bc')) {
     if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
@@ -1135,7 +1135,17 @@ client.on('message', message => {
     let errorCount = 0;
     let successCount = 0;
     reaction1.on("collect", r => {
-    message.channel.send(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`)
+    message.channel.send(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`)then(msg => {
+      message.guild.members.forEach(g => {
+        g.send(args.slice(1).join(' ')).then(() => {
+          successCount++;
+          msgCount++;
+          msg.edit(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`);
+        }).catch(e => {
+          errorCount++;
+          msgCount++;
+          msg.edit(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`);
+
     message.guild.members.forEach(m => {
     var bc = new
        Discord.RichEmbed()
@@ -1157,6 +1167,9 @@ client.on('message', message => {
     })
     }
     })
+	        });
+      });
+    });
 	
 	
 client.on("message", (message) => {
