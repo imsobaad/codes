@@ -1151,7 +1151,6 @@ client.on('message', msg => {
     })
     })
     }
-    })
 
 
 	
