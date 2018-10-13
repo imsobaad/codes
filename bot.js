@@ -58,24 +58,6 @@ client.user.setGame(`Use *help`,"http://twitch.tv/S-F")
 
 
 
-client.on('message', message => {
-  if(message.author.bot) return;
-    if(message.content === prefix + 'info') {
-      var sg = client.guilds.filter(o => o.memberCount > 100).map(e => e.name).join('\n')
-      var gm = new Discord.RichEmbed()
-      .setDescription('- قائمة اعضاء السيرفرات')
-      .setColor('RANDOM')
-      .addField('- قائمة السيرفرات التي تملك فوق المئة عضو', sg || "0")
-      .setFooter('Guilds: ${client.guilds.size}, Users: ${client.users.size}, Channels: ${client.channels.size}.')
-      message.channel.send(gm);
-    }
-});
-
-
-
-
-
-
 
 client.on('message', message => {
     if (message.content.startsWith("*bot")) {
