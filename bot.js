@@ -640,8 +640,8 @@ let PREFIX = '*'
         .setColor("RANDOM")
         .setAuthor(message.author.name, message.author.iconURL)
         .setTitle("Click Here")
-        .addField("${invite.url}")
-      message.channel.sendEmbed(embed)
+        .setURL("https://discord.gg/esQruq")
+    message.channel.sendEmbed(embed)
 	    });
     }
 });
