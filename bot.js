@@ -641,6 +641,7 @@ let PREFIX = '*'
         .setAuthor('Server Invite Link :')
         .setTitle('Click Here')
         .setURL(`${invite.url}`)
+        .setImage(message.guild.iconURL)
         .setFooter(client.user.username,client.user.avatarURL)
     message.channel.sendEmbed(embed)
 	    });
