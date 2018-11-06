@@ -2118,7 +2118,7 @@ client.on('message',  (message) => {
 	
 	
 client.on("message", function(message) {
-	var prefix = "-";
+	var prefix = "*";
    if(message.content.startsWith(prefix + "rps")) {
     let messageArgs = message.content.split(" ").slice(1).join(" ");
     let messageRPS = message.content.split(" ").slice(2).join(" ");
@@ -2132,14 +2132,14 @@ client.on("message", function(message) {
     .addField("Scissors","🇸",true)
     message.channel.send(RpsEmbed).then(msg => {
         msg.react(' 🇷')
-        msg.react("🇸")
         msg.react("🇵")
+        msg.react("🇸")
 .then(() => msg.react('🇷'))
-.then(() =>msg.react('🇸'))
-.then(() => msg.react('🇵'))
+.then(() =>msg.react('🇵'))
+.then(() => msg.react('🇸'))
 let reaction1Filter = (reaction, user) => reaction.emoji.name === '🇷' && user.id === message.author.id;
-let reaction2Filter = (reaction, user) => reaction.emoji.name === '🇸' && user.id === message.author.id;
-let reaction3Filter = (reaction, user) => reaction.emoji.name === '🇵' && user.id === message.author.id;
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '🇵' && user.id === message.author.id;
+let reaction3Filter = (reaction, user) => reaction.emoji.name === '🇸' && user.id === message.author.id;
 let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
 	    
 let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
