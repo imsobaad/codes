@@ -635,14 +635,13 @@ let PREFIX = '*'
         thing: true,
         maxUses: 5,
         maxAge: 86400
-    }).then(invite => {  
+    }).then(invite =>  
     const embed = new Discord.RichEmbed()
         .setColor("RANDOM")
         .setAuthor(message.author.name, message.author.iconURL)
         .setTitle("Click Here")
         .setURL("${invite.url}")
       message.channel.sendEmbed(embed)
-    }
 	    }
 });
 
