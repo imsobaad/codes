@@ -638,9 +638,9 @@ let PREFIX = '*'
     }).then(invite => { 
     const embed = new Discord.RichEmbed()
         .setColor("RANDOM")
-        .setAuthor(message.author.name, message.author.iconURL)
+        .setAuthor(message.author.username, message.author.avatarURL)
         .setTitle("Click Here")
-        .setURL("https://discord.gg/esQruq")
+        .setURL("[inviteURL]")
     message.channel.sendEmbed(embed)
 	    });
     }
