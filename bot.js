@@ -13,7 +13,6 @@ const giphy = require('giphy-api')();
 const googl = require('goo.gl'); 
 const translate = require('google-translate-api');   
 const fs = require("fs"); 
-var data = JSON.parse(fs.readFileSync('data.json','utf8'))
 const moment = require("moment");
 const UserBlocked = new Set(); 
 const jimp = require('jimp');   
