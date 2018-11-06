@@ -643,7 +643,7 @@ let PREFIX = '*'
         .setURL("${invite.url}")
       message.channel.sendEmbed(embed)
     }
- 
+	    }
 });
 
 
