@@ -633,25 +633,15 @@ let PREFIX = '*'
     if (message.content.startsWith("*link")) {        
   message.channel.createInvite({
         thing: true,
-        maxUses: 100,
+        maxUses: 5,
         maxAge: 86400
-    }).then(invite =>  
-      message.author.sendMessage(invite.url)
-    )
+    }).then(invite => {  
     const embed = new Discord.RichEmbed()
         .setColor("RANDOM")
-        .setDescription(" :white_check_mark: تم ارسال الرابط على الخاص ")
-      message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
-              const Embed11 = new Discord.RichEmbed()
-        .setColor("RANDOM")
-                .setAuthor(message.guild.name, message.guild.iconURL)
-        .setDescription(`
----------------------
- :kissing_closed_eyes:  - هذا الرابط صالح ل 100 مستخدم فقط
----------------------
- :smiley: - هذا الرابط صالح لمده 24 ساعه فقط
----------------------`)
-      message.author.sendEmbed(Embed11)
+        .setAuthor(message.author.name, message.author.iconURL)
+        .setTitle("Click Here")
+        .setURL("${invite.url}")
+      message.channel.sendEmbed(embed)
     }
  
 });
