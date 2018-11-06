@@ -640,7 +640,7 @@ let PREFIX = '*'
         .setColor("RANDOM")
         .setAuthor(message.author.name, message.author.iconURL)
         .setTitle("Click Here")
-        .setURL("${inviteURL}")
+        .addField("${invite.url}")
       message.channel.sendEmbed(embed)
 	    });
     }
