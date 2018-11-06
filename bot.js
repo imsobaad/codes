@@ -642,7 +642,7 @@ let PREFIX = '*'
         .setTitle('Click Here')
         .setURL(`${invite.url}`)
         .setImage(message.guild.iconURL)
-        .setFooter(client.user.username,client.user.avatarURL)
+        .setFooter('Requested By : '+message.author.username,message.author.avatarURL)
     message.channel.sendEmbed(embed)
 	    });
     }
