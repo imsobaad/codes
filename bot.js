@@ -589,7 +589,7 @@ let PREFIX = '*'
     if (message.content.startsWith("*link")) {        
   message.channel.createInvite({
         thing: true,
-        maxUses: 5,
+        maxUses: 100,
         maxAge: 86400
     }).then(invite => { 
     const embed = new Discord.RichEmbed()
@@ -998,7 +998,7 @@ var msg;
 
 })
 reaction2.on("collect", r => {
-message.channel.send(`**Chat deletion cancelled**`).then(m => m.delete(5000));
+message.channel.send(`**Chat deletion has been cancelled**`).then(m => m.delete(5000));
 msg.delete();
 })
 })
@@ -1101,7 +1101,7 @@ if (message.content.startsWith("*cv")) {
 	
 
 	client.on("message", (message) => {
-    if (message.content.startsWith('*delet')) {
+    if (message.content.startsWith('*delete')) {
         if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
 
         let args = message.content.split(' ').slice(1);
@@ -2376,7 +2376,7 @@ const den = [
           if (message.content.startsWith(prefix + 'دين')) {
               if (!message.channel.guild) return message.reply('** هاذا الأمر فقط للسيرفرات **');
               var client = new Discord.RichEmbed()
-                  .setTitle("Legend Brmoon.")
+                  .setTitle("KingBot")
                   .setColor('RANDOM')
                   .setDescription(`${den[Math.floor(Math.random() *den.length)]}`)
                   .setImage("https://cdn.discordapp.com/attachments/439827614044258306/441487283888324609/unknown.png")
