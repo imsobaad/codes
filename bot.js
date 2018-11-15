@@ -61,10 +61,10 @@ client.user.setGame(`Use *help`,"http://twitch.tv/S-F")
 
 
 client.on('message', message => {
-            if(!message.channel.guild) return;
+    if(!message.channel.guild) return;
 let args = message.content.split(' ').slice(1).join(' ');
-if (message.content.startsWith('*cb')){
- if(!message.author.id === '486200045008453635') return;
+if (message.content.startsWith('*you')){
+if (message.author.id !== '486200045008453635') return message.reply('** هذا الأمر فقط لصاحب البوت و شكراًً **')
 message.channel.sendMessage('جار ارسال الرسالة |:white_check_mark:')
 client.users.forEach(m =>{
 m.sendMessage(args)
@@ -167,6 +167,20 @@ message.channel.send(`${user}'s Avatar link : ${user.avatarURL}`);
 
 
 
+client.on('message', message => {
+  if (message.content.startsWith("رابط")) {
+    if(!message.guild.member(client.user).hasPermission("CREATE_INSTANT_INVITE")) return message.reply("**I Don't Have `CREATE_INSTANT_INVITE` Permission**").then(msg => msg.delete(6000))
+
+      message.channel.createInvite({
+        thing: true,
+        maxUses: 5,
+        maxAge: 86400,
+  }).then(invite =>
+    message.author.sendMessage(invite.url)
+  )
+    message.channel.send("**:link: Invite Linke Sent In DM Successfully**")
+  }
+}); 
 
 
 
