@@ -64,8 +64,8 @@ client.on('message', message => {
   if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
   message.channel.sendMessage('عضو ${message.guild.memberCount} يتم ارسال البرودكاست الى  ')
   message.guild.members.forEach(m => {
-  m.send( "[user]" + "\n" +
- "**" +`[args]` + "**")
+  m.send( "${guild.member}" + "\n" +
+ "**" +`${args}` + "**")
 
 })
 }
