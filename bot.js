@@ -444,14 +444,6 @@ message.channel.send(embed);
 
 
 
-client.on("guildMemberAdd", member => {
-  member.createDM().then(function (channel) {
-  return channel.send(`:rose:  ولكم نورت السيرفر:rose: 
-:crown:اسم العضو  ${member}:crown:  
-:bust_in_silhouette: انت العضو رقم ${member.guild.memberCount}:bust_in_silhouette: 
-:checkered_flag: تاريخ انضمامك للسيرفر ${member.joinedAt.toLocaleString()} :checkered_flag:`) 
-}).catch(console.error)
-})
 
 
 
