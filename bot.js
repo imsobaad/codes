@@ -54,6 +54,7 @@ client.on('ready', () => {
 });
 
 
+client.on('ready', () => client.user.setActivity(`*help`, {type: "LISTENING"}))
 
 
 
