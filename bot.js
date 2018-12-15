@@ -203,7 +203,7 @@ client.on('message', message => {
   }).then(invite =>
     message.author.sendMessage(invite.url)
   )
-    message.channel.send("**:link: Invite Linke Sent In DM Successfully**")
+    message.channel.send("**:link: Invite Link Was Successfully Sent In DM**")
   }
 }); 
 
